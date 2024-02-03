@@ -2,4 +2,54 @@
     <string name="app_name">Engineer\'s metal calcs</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="saved_calcs">Сохранённые расчёты</string>
+    <string name="saved_calc">Сохранённый расчёт</string>
+    <string name="saved">сохранено</string>
+
+    <string name="main_menu_button1">Температура заливки</string>
+    <string name="main_menu_button2">Литейный расчёт</string>
+    <string name="main_menu_button3">Шихтовка</string>
+    <string name="main_menu_button4">Контроль качества литейной продукции</string>
+    <string name="main_menu_button5">Справочник модельщика и формовщика</string>
+
+    <string name="likvid_calc_menu_button1">Заливка фасонного литья</string>
+    <string name="likvid_calc_main_menu_button2">Заливка слитков</string>
+    <string name="likvid_calc_main_menu_button3">Справочник температур плавления металлов и ферросплавов</string>
+
+    <string name="C">C</string>
+    <string name="Si">Si</string>
+    <string name="Mn">Mn</string>
+    <string name="P">P</string>
+    <string name="S">S</string>
+    <string name="Cr">Cr</string>
+    <string name="Ni">Ni</string>
+    <string name="Cu">Cu</string>
+    <string name="Al">Al</string>
+    <string name="Ti">Ti</string>
+    <string name="V">V</string>
+    <string name="Mo">Mo</string>
+    <string name="W">W</string>
+
+    <string name="calculate">Рассчитать</string>
+    <string name="tempCast">Заливка, \u2103</string>
+    <string name="likvidAnsw">Ликвидус (Т начала кристализации), \u2103</string>
+    <string name="tempInStove">Температура в печи, \u2103</string>
+
+    <string name="rename">Переименовать</string>
+    <string name="change_description">Изменить описание</string>
+    <string name="remove_description">Убрать описание</string>
+    <string name="remove">Удалить</string>
+
+    <string name="remove_item_window">Удалить из списка?</string>
+    <string name="remove_description_of_item_window">Убрать описание?</string>
+    <string name="rename_item_window">Введите новое название</string>
+    <string name="name_item_window">Введите название</string>
+    <string name="change_description_item_window">Введите новое описание</string>
+    <string name="description_item_window">Введите описание</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="cancel">Отмена</string>
+    <string name="ready">Готово</string>
+    <string name="confirm">Подтверждение</string>
 </resources>
