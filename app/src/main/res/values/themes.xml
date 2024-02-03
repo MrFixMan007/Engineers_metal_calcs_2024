@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.EngineersMetalCalcs" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.EngineersMetalCalcs" parent="android:Theme.Material.Light.NoActionBar" >
+        <item name="colorPrimary">@color/primaryElementsColor</item>
+        <item name="colorPrimaryVariant">@color/backgroundColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+
+<!--        Цвет верхнего системного статус бара-->
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+<!--        Цвет нижнего системного бара -->
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+<!--        Размер текста по умолчанию-->
+        <item name="android:textSize">@dimen/t3</item>
+    </style>
+
+    <style name="CustomPrimaryTextView." parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">@dimen/t3</item>
+    </style>
+
+    <style name="CustomEditText." parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/secondaryElementsColor</item>
+        <item name="android:textColorHint">@color/secondaryElementsColor</item>
+        <item name="android:textSize">@dimen/t2</item>
+    </style>
+
+    <style name="CustomBigMenuButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/rounded_card</item>
+        <item name="android:textSize">@dimen/t1</item>
+    </style>
+
 </resources>
