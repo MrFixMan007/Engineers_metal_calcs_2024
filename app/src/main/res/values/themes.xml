@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.EngineersMetalCalcs" parent="android:Theme.Material.Light.NoActionBar" >
+    <style name="Theme.EngineersMetalCalcs" parent="Theme.AppCompat.Light.DarkActionBar" >
         <item name="colorPrimary">@color/primaryElementsColor</item>
         <item name="colorPrimaryVariant">@color/backgroundColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
 
 <!--        Цвет верхнего системного статус бара-->

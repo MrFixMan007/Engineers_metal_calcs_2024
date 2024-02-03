@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.MainFragment"
-    android:background="@color/backgroundColor"
-    >
+    tools:context=".fragments.LikvidTempMenuFragment"
+    android:background="@color/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,24 +20,24 @@
 
             <Button
                 style="@style/CustomBigMenuButton"
-                android:id="@+id/main_menu_button1"
+                android:id="@+id/likvid_calc_menu_button1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginTop="@dimen/marginTopLeft"
                 android:layout_marginLeft="@dimen/marginTopLeft"
-                android:text="@string/main_menu_button1"
+                android:text="@string/likvid_calc_menu_button1"
                 />
             <Button
                 style="@style/CustomBigMenuButton"
-                android:id="@+id/main_menu_button2"
+                android:id="@+id/likvid_calc_main_menu_button2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginTop="@dimen/marginTopLeft"
                 android:layout_marginLeft="@dimen/marginTopLeft"
                 android:layout_marginRight="@dimen/marginTopLeft"
-                android:text="@string/main_menu_button2"
+                android:text="@string/likvid_calc_main_menu_button2"
                 />
 
         </LinearLayout>
@@ -51,24 +50,24 @@
 
             <Button
                 style="@style/CustomBigMenuButton"
-                android:id="@+id/main_menu_button3"
+                android:id="@+id/likvid_calc_main_menu_button3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginTop="@dimen/marginTopLeft"
                 android:layout_marginLeft="@dimen/marginTopLeft"
-                android:text="@string/main_menu_button3"
+                android:text="@string/likvid_calc_main_menu_button3"
                 />
             <Button
                 style="@style/CustomBigMenuButton"
-                android:id="@+id/main_menu_button4"
+                android:id="@+id/likvid_calc_main_menu_button4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginTop="@dimen/marginTopLeft"
                 android:layout_marginLeft="@dimen/marginTopLeft"
                 android:layout_marginRight="@dimen/marginTopLeft"
-                android:text="@string/main_menu_button4"
+                android:text="@string/saved_calcs"
                 />
 
         </LinearLayout>
@@ -80,8 +79,8 @@
             >
 
             <Button
+                android:visibility="invisible"
                 style="@style/CustomBigMenuButton"
-                android:id="@+id/main_menu_button5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -89,11 +88,9 @@
                 android:layout_marginLeft="@dimen/marginTopLeft"
                 android:layout_marginRight="@dimen/marginTopLeft"
                 android:layout_marginBottom="@dimen/marginTopLeft"
-                android:text="@string/main_menu_button5"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
