@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.engineersmetalcalcs.fragments.MainFragment"
-        android:label="fragment_main"
+        android:label="@string/main_menu"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_likvidTempMenuFragment"
@@ -17,10 +17,22 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_castingMenuFragment"
+            app:destination="@id/castingMenuFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/likvidTempMenuFragment"
         android:name="com.example.engineersmetalcalcs.fragments.LikvidTempMenuFragment"
-        android:label="fragment_likvid_temp_menu"
+        android:label="@string/main_menu_button1"
         tools:layout="@layout/fragment_likvid_temp_menu" />
+    <fragment
+        android:id="@+id/castingMenuFragment"
+        android:name="com.example.engineersmetalcalcs.fragments.CastingMenuFragment"
+        android:label="@string/main_menu_button2"
+        tools:layout="@layout/fragment_casting_menu" />
 </navigation>

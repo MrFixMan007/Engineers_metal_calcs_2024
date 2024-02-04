@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.engineersmetalcalcs.R
 
 class MainFragment : Fragment() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -27,7 +26,9 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val controller = findNavController()
         val button1 = view.findViewById<Button>(R.id.main_menu_button1)
+        val button2 = view.findViewById<Button>(R.id.main_menu_button2)
 
         button1.setOnClickListener {controller.navigate(R.id.action_mainFragment_to_likvidTempMenuFragment)}
+        button2.setOnClickListener {controller.navigate(R.id.action_mainFragment_to_castingMenuFragment)}
     }
 }

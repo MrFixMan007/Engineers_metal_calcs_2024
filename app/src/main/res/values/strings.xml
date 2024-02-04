@@ -7,6 +7,7 @@
     <string name="saved_calc">Сохранённый расчёт</string>
     <string name="saved">сохранено</string>
 
+    <string name="main_menu">Главное меню</string>
     <string name="main_menu_button1">Температура заливки</string>
     <string name="main_menu_button2">Литейный расчёт</string>
     <string name="main_menu_button3">Шихтовка</string>
