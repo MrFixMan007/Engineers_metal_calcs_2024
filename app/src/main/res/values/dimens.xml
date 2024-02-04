@@ -9,4 +9,5 @@
     <dimen name="largeSize">25dp</dimen>
 
     <dimen name="marginTopLeft">5dp</dimen>
+    <dimen name="textPadding">10dp</dimen>
 </resources>

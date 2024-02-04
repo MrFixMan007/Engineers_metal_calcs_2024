@@ -16,6 +16,7 @@
     <string name="likvid_calc_menu_button1">Заливка фасонного литья</string>
     <string name="likvid_calc_main_menu_button2">Заливка слитков</string>
     <string name="likvid_calc_main_menu_button3">Справочник температур плавления металлов и ферросплавов</string>
+    <string name="calc_weight_of_the_cargo">Расчёт массы груза без стержней</string>
 
     <string name="C">C</string>
     <string name="Si">Si</string>
@@ -52,4 +53,5 @@
     <string name="cancel">Отмена</string>
     <string name="ready">Готово</string>
     <string name="confirm">Подтверждение</string>
+    <string name="button">Кнопка</string>
 </resources>

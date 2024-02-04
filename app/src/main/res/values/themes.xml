@@ -29,6 +29,24 @@
     <style name="CustomBigMenuButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_card</item>
         <item name="android:textSize">@dimen/t1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">@dimen/marginTopLeft</item>
+        <item name="android:layout_marginLeft">@dimen/marginTopLeft</item>
+    </style>
+
+    <style name="CustomChapterButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/rounded_card</item>
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/marginTopLeft</item>
+        <item name="android:layout_marginLeft">@dimen/marginTopLeft</item>
+        <item name="android:layout_marginRight">@dimen/marginTopLeft</item>
+        <item name="android:padding">@dimen/textPadding</item>
+        <item name="android:inputType">text</item>
+        <item name="android:text">@string/button</item>
     </style>
 
 </resources>

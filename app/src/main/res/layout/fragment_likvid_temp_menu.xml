@@ -21,21 +21,11 @@
             <Button
                 style="@style/CustomBigMenuButton"
                 android:id="@+id/likvid_calc_menu_button1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="@dimen/marginTopLeft"
-                android:layout_marginLeft="@dimen/marginTopLeft"
                 android:text="@string/likvid_calc_menu_button1"
                 />
             <Button
                 style="@style/CustomBigMenuButton"
                 android:id="@+id/likvid_calc_main_menu_button2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="@dimen/marginTopLeft"
-                android:layout_marginLeft="@dimen/marginTopLeft"
                 android:layout_marginRight="@dimen/marginTopLeft"
                 android:text="@string/likvid_calc_main_menu_button2"
                 />
@@ -51,21 +41,11 @@
             <Button
                 style="@style/CustomBigMenuButton"
                 android:id="@+id/likvid_calc_main_menu_button3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="@dimen/marginTopLeft"
-                android:layout_marginLeft="@dimen/marginTopLeft"
                 android:text="@string/likvid_calc_main_menu_button3"
                 />
             <Button
                 style="@style/CustomBigMenuButton"
                 android:id="@+id/likvid_calc_main_menu_button4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="@dimen/marginTopLeft"
-                android:layout_marginLeft="@dimen/marginTopLeft"
                 android:layout_marginRight="@dimen/marginTopLeft"
                 android:text="@string/saved_calcs"
                 />
@@ -81,11 +61,6 @@
             <Button
                 android:visibility="invisible"
                 style="@style/CustomBigMenuButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="@dimen/marginTopLeft"
-                android:layout_marginLeft="@dimen/marginTopLeft"
                 android:layout_marginRight="@dimen/marginTopLeft"
                 android:layout_marginBottom="@dimen/marginTopLeft"
                 />
