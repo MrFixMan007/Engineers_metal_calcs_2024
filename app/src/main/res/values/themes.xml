@@ -6,6 +6,7 @@
         <item name="colorPrimaryVariant">@color/backgroundColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="android:windowFullscreen">true</item>
 
 <!--        Цвет верхнего системного статус бара-->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>

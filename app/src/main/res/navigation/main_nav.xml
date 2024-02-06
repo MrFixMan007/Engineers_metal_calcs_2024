@@ -34,5 +34,18 @@
         android:id="@+id/castingMenuFragment"
         android:name="com.example.engineersmetalcalcs.fragments.CastingMenuFragment"
         android:label="@string/main_menu_button2"
-        tools:layout="@layout/fragment_casting_menu" />
+        tools:layout="@layout/fragment_casting_menu" >
+        <action
+            android:id="@+id/action_castingMenuFragment_to_cargoWeightFragment"
+            app:destination="@id/cargoWeightFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/cargoWeightFragment"
+        android:name="com.example.engineersmetalcalcs.fragments.CargoWeightFragment"
+        android:label="@string/calc_weight_of_the_cargo"
+        tools:layout="@layout/fragment_cargo_weight" />
 </navigation>
