@@ -4,7 +4,7 @@
     <style name="Theme.EngineersMetalCalcs" parent="Theme.AppCompat.Light.DarkActionBar" >
         <item name="colorPrimary">@color/primaryElementsColor</item>
         <item name="colorPrimaryVariant">@color/backgroundColor</item>
-        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/secondaryElementsColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
         <item name="android:windowFullscreen">true</item>
 
@@ -21,15 +21,18 @@
         <item name="android:textSize">@dimen/t3</item>
     </style>
 
-    <style name="CustomEditText." parent="Widget.AppCompat.EditText">
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/secondaryElementsColor</item>
         <item name="android:textColorHint">@color/secondaryElementsColor</item>
         <item name="android:textSize">@dimen/t2</item>
+        <item name="backgroundTint">@color/secondaryElementsColor</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="CustomBigMenuButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_card</item>
         <item name="android:textSize">@dimen/t1</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
@@ -40,6 +43,7 @@
     <style name="CustomChapterButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_card</item>
         <item name="android:textSize">@dimen/t2</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/marginTopLeft</item>
@@ -48,6 +52,17 @@
         <item name="android:padding">@dimen/textPadding</item>
         <item name="android:inputType">text</item>
         <item name="android:text">@string/button</item>
+    </style>
+
+    <style name="CustomTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/t3</item>
+        <item name="android:textColor">@color/secondaryElementsColor</item>
+    </style>
+    
+    <style name="CustomSpinnerDropDownStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textSize">@dimen/t3</item>
+        <item name="android:dropDownWidth">100dp</item>
+        <item name="android:popupBackground">@color/backgroundColor</item>
     </style>
 
 </resources>

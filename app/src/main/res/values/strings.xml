@@ -17,7 +17,9 @@
     <string name="likvid_calc_menu_button1">Заливка фасонного литья</string>
     <string name="likvid_calc_main_menu_button2">Заливка слитков</string>
     <string name="likvid_calc_main_menu_button3">Справочник температур плавления металлов и ферросплавов</string>
-    <string name="calc_weight_of_the_cargo">Расчёт массы груза без стержней</string>
+    <string name="calc_weight_of_the_cargo">Расчёт массы груза</string>
+    <string name="calc_weight_of_the_cargo_with_rods">Расчёт массы груза со стержнями</string>
+    <string name="calc_weight_of_the_cargo_without_rods">Расчёт массы груза без стержней</string>
 
     <string name="C">C</string>
     <string name="Si">Si</string>
@@ -55,4 +57,38 @@
     <string name="ready">Готово</string>
     <string name="confirm">Подтверждение</string>
     <string name="button">Кнопка</string>
+
+<!--    Единицы измерения-->
+    <string name="mm">мм</string>
+    <string name="cm">см</string>
+    <string name="dm">дм</string>
+    <string name="m">м</string>
+    <string name="km">км</string>
+
+    <string name="g">г</string>
+    <string name="kg">кг</string>
+    <string name="c">ц</string>
+    <string name="t">тонн</string>
+
+    <string name="mm3">мм3</string>
+    <string name="cm3">см3</string>
+    <string name="dm3">дм3</string>
+    <string name="m3">м3</string>
+
+<!--    Расчёт массы груза без стержней-->
+    <string-array name="weightCargoArrayWith">
+        <item>Объем полости над отливкой в верхней ПФ до уровня металла в литниковой воронке (V)</item>
+        <item>Производственный коэф запаса на удельный вес жидкого металла</item>
+        <item>Масса груза для формы без стержней (P)</item>
+    </string-array>
+
+<!--    Расчёт массы груза без стержней-->
+    <string-array name="weightCargoArrayWithout">
+        <item>Объем полости над отливкой в верхней ПФ до уровня металла в литниковой воронке (V)</item>
+        <item>Объем стержней без стержневых знаков (V)</item>
+        <item>Производственный коэффициент запаса на удельный вес жидкого металла</item>
+        <item>Производственный коэффициент 1</item>
+        <item>Производственный коэффициент 2</item>
+        <item>Масса груза для формы со стержнями (P)</item>
+    </string-array>
 </resources>

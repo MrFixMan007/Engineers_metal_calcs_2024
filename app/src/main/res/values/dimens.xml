@@ -8,6 +8,7 @@
     <dimen name="t4">10dp</dimen>
     <dimen name="largeSize">25dp</dimen>
 
+    <dimen name="tinyMargin">1dp</dimen>
     <dimen name="marginTopLeft">5dp</dimen>
     <dimen name="textPadding">10dp</dimen>
 </resources>

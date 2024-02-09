@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.engineersmetalcalcs.R
 import com.example.engineersmetalcalcs.adapters.ChapterAdapter
 import com.example.engineersmetalcalcs.databinding.FragmentCastingMenuBinding
-import com.example.engineersmetalcalcs.renderDto.Chapter
+import com.example.engineersmetalcalcs.listItem.Chapter
 
 class CastingMenuFragment : Fragment(), ChapterAdapter.Listener {
     private lateinit var binding: FragmentCastingMenuBinding
@@ -39,7 +39,7 @@ class CastingMenuFragment : Fragment(), ChapterAdapter.Listener {
         binding.apply {
             rcViewCastChapters.layoutManager = LinearLayoutManager(context)
             rcViewCastChapters.adapter = adapter
-            adapter.addAllChapters(chapters)
+            adapter.addAll(chapters)
         }
     }
 

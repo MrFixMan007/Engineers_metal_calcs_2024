@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unitsOfLength">
+        <item>@string/mm</item>
+        <item>@string/cm</item>
+        <item>@string/dm</item>
+        <item>@string/m</item>
+        <item>@string/km</item>
+    </string-array>
+
+    <string-array name="unitsOfWeight">
+        <item>@string/g</item>
+        <item>@string/kg</item>
+        <item>@string/c</item>
+        <item>@string/t</item>
+    </string-array>
+
+    <string-array name="unitsOfVolume">
+        <item>@string/mm3</item>
+        <item>@string/cm3</item>
+        <item>@string/dm3</item>
+        <item>@string/m3</item>
+    </string-array>
+</resources>
