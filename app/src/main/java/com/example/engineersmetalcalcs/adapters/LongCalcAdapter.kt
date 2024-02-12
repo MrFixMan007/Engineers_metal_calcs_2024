@@ -10,24 +10,24 @@ import com.example.engineersmetalcalcs.R
 import com.example.engineersmetalcalcs.databinding.LongInputWithDescriptionBinding
 import com.example.engineersmetalcalcs.databinding.LongInputWithDescriptionWithSpinnerItemBinding
 import com.example.engineersmetalcalcs.databinding.LongOutputWithDescriptionWithSpinnerItemBinding
-import com.example.engineersmetalcalcs.listItem.LongCalc
+import com.example.engineersmetalcalcs.listItem.CalcUnit
 import com.example.engineersmetalcalcs.unitsOfMeasurement.StringArrayMapper
 
 class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val calcList = ArrayList<LongCalc>()
+    private val calcList = ArrayList<CalcUnit>()
     class LongInputCalcHolder(item: View): RecyclerView.ViewHolder(item) {
         private val binding = LongInputWithDescriptionWithSpinnerItemBinding.bind(item)
-        fun bind(longCalc: LongCalc, listener: Listener) = with(binding){
-            descriptionTextView.text = longCalc.description
-            inputEditText.setText(longCalc.value.toString())
+        fun bind(calcUnit: CalcUnit, listener: Listener) = with(binding){
+            descriptionTextView.text = calcUnit.description
+            inputEditText.setText(calcUnit.value.toString())
 
             val mapper = StringArrayMapper(itemView.context)
             val adapter = ArrayAdapter.createFromResource(itemView.context,
-                mapper.getStringArrayResourceId(longCalc.measuredIn), android.R.layout.simple_spinner_item)
+                mapper.getStringArrayResourceId(calcUnit.measuredIn), android.R.layout.simple_spinner_item)
 
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
             spinnerUnitOfMeasurement.adapter = adapter
-            spinnerUnitOfMeasurement.setSelection(mapper.getPosition(longCalc.measuredIn))
+            spinnerUnitOfMeasurement.setSelection(mapper.getPosition(calcUnit.measuredIn))
             spinnerUnitOfMeasurement.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -35,7 +35,7 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
                     position: Int,
                     id: Long
                 ) {
-                    listener.onClick(longCalc)
+                    listener.onClick(calcUnit)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -47,27 +47,27 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
 
     class LongInputCoefCalcHolder(item: View): RecyclerView.ViewHolder(item) {
         private val binding = LongInputWithDescriptionBinding.bind(item)
-        fun bind(longCalc: LongCalc, listener: Listener) = with(binding){
-            descriptionTextView.text = longCalc.description
-            inputEditText.setText(longCalc.value.toString())
+        fun bind(calcUnit: CalcUnit, listener: Listener) = with(binding){
+            descriptionTextView.text = calcUnit.description
+            inputEditText.setText(calcUnit.value.toString())
         }
     }
 
     class LongOutputCalcHolder(item: View): RecyclerView.ViewHolder(item) {
         private val binding = LongOutputWithDescriptionWithSpinnerItemBinding.bind(item)
-        fun bind(longCalc: LongCalc, listener: Listener) = with(binding){
-            descriptionTextView.text = longCalc.description
-            inputEditText.setText(longCalc.value.toString())
+        fun bind(calcUnit: CalcUnit, listener: Listener) = with(binding){
+            descriptionTextView.text = calcUnit.description
+            inputEditText.setText(calcUnit.value.toString())
             inputEditText.keyListener = null
 
             val mapper = StringArrayMapper(itemView.context)
             val adapter = ArrayAdapter.createFromResource(itemView.context,
-                mapper.getStringArrayResourceId(longCalc.measuredIn),
+                mapper.getStringArrayResourceId(calcUnit.measuredIn),
                 android.R.layout.simple_spinner_item)
 
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
             spinnerUnitOfMeasurement.adapter = adapter
-            spinnerUnitOfMeasurement.setSelection(mapper.getPosition(longCalc.measuredIn))
+            spinnerUnitOfMeasurement.setSelection(mapper.getPosition(calcUnit.measuredIn))
             spinnerUnitOfMeasurement.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -75,7 +75,7 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
                     position: Int,
                     id: Long
                 ) {
-                    listener.onClick(longCalc)
+                    listener.onClick(calcUnit)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -88,17 +88,17 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            LongCalc.INPUT -> {
+            CalcUnit.INPUT -> {
                 val view = LayoutInflater.from(parent.context).inflate(
                     R.layout.long_input_with_description_with_spinner_item, parent, false)
                 LongInputCalcHolder(view)
             }
-            LongCalc.INPUT_COEFICIENT -> {
+            CalcUnit.INPUT_COEFICIENT -> {
                 val view = LayoutInflater.from(parent.context).inflate(
                     R.layout.long_input_with_description, parent, false)
                 LongInputCoefCalcHolder(view)
             }
-            LongCalc.OUTPUT -> {
+            CalcUnit.OUTPUT -> {
                 val view = LayoutInflater.from(parent.context).inflate(
                     R.layout.long_output_with_description_with_spinner_item, parent, false)
                 LongOutputCalcHolder(view)
@@ -129,12 +129,12 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
         return calcList[position].type
     }
 
-    fun addAll(items: List<LongCalc>){
+    fun addAll(items: List<CalcUnit>){
         calcList.addAll(items)
         notifyDataSetChanged()
     }
 
     interface Listener{
-        fun onClick(item: LongCalc)
+        fun onClick(item: CalcUnit)
     }
 }
