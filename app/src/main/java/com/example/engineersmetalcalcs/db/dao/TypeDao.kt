@@ -11,12 +11,17 @@ import com.example.engineersmetalcalcs.db.entities.Type
 interface TypeDao {
     @Query("SELECT * FROM type WHERE id = :id")
     fun getById(id: Long): Type
+    @Query("SELECT * FROM type WHERE name = :name")
+    fun getByName(name: String): Type
 
     @get:Query("SELECT * FROM type")
     val all: List<Type>
 
     @get:Query("SELECT COUNT(*) FROM type")
     val countOfTypes: Int
+
+    @Query("DELETE FROM type")
+    fun deleteAll()
 
     @Insert
     fun insert(obj: Type): Long

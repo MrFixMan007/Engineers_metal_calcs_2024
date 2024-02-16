@@ -10,7 +10,8 @@ data class Type(
     var id: Long? = null,
     @ColumnInfo(index = true)
     var name: String
-){
+)
+{
     fun changeName(name: String) {
         if (name.length <= 100) this.name = name else this.name = name.substring(0, 100)
     }

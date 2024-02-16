@@ -9,9 +9,9 @@
     </string-array>
 
     <string-array name="unitsOfWeight">
-        <item>@string/g</item>
+<!--        <item>@string/g</item>-->
         <item>@string/kg</item>
-        <item>@string/c</item>
+<!--        <item>@string/c</item>-->
         <item>@string/t</item>
     </string-array>
 

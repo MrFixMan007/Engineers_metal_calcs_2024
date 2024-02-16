@@ -35,15 +35,14 @@
             android:inputType="numberDecimal"
             />
 
-        <Spinner
-            style="@style/CustomSpinnerDropDownStyle"
-            android:id="@+id/spinnerUnitOfMeasurement"
+        <TextView
+            style="@style/CustomTextView"
+            android:id="@+id/unitOfMeasurementTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.35"
+            android:layout_weight="0.2"
             android:layout_marginLeft="@dimen/tinyMargin"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/custom_spinner_background"
+            android:gravity="center_horizontal"
             />
 
     </LinearLayout>

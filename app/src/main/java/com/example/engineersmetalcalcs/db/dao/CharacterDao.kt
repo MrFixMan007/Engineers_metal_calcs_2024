@@ -17,6 +17,9 @@ interface CharacterDao {
     @Query("SELECT * FROM character WHERE typeIdFk = :id")
     fun getAllByTypeIdFk(id: Long): List<Character>
 
+    @Query("DELETE FROM character")
+    fun deleteAll()
+
     @get:Query("SELECT COUNT(*) FROM character")
     val countOfCharacters: Int
 

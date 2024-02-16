@@ -38,11 +38,12 @@
                 >
 
                 <TextView
+                    android:id="@+id/typeTextView1"
                     android:textColor="@color/primaryTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/t1"
-                    android:text="@string/calc_weight_of_the_cargo_with_rods"
+                    android:text="@string/calc1"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -67,11 +68,12 @@
                 >
 
                 <TextView
+                    android:id="@+id/typeTextView2"
                     android:textColor="@color/primaryTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/t1"
-                    android:text="@string/calc_weight_of_the_cargo_without_rods"
+                    android:text="@string/calc2"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView

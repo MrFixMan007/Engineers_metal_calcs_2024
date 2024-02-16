@@ -1,5 +1,6 @@
 package com.example.engineersmetalcalcs.db.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -10,7 +11,9 @@ import androidx.room.PrimaryKey
 data class Character(
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null,
+    @ColumnInfo(index = true)
     var typeIdFk: Long,
+    @ColumnInfo(index = true)
     var name: String,
     var low: Float,
     var top: Float,
@@ -18,7 +21,8 @@ data class Character(
     var measuredIn: String,
     var defaultValue: Float,
     var koef: Float,
-    var isInput: Boolean = true
+    var isInput: Boolean = true,
+    var isStrongMeasure: Boolean = false
 )
 {
     fun changeName(name: String) {

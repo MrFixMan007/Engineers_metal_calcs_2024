@@ -1,6 +1,8 @@
 package com.example.engineersmetalcalcs.calcServices
 
 import android.content.Context
+import android.util.Log
+import com.example.engineersmetalcalcs.R
 import com.example.engineersmetalcalcs.listItem.CalcUnit
 import com.example.engineersmetalcalcs.unitsOfMeasurement.CoefArrayMapper
 import kotlin.math.roundToInt
@@ -24,6 +26,12 @@ data class WeightCargoService(val context: Context, var v: CalcUnit, var k: Calc
     }
 
     private fun round(){
+        roundPB = if (pB.measuredIn == context.getString(R.string.t)) 2
+        else 0
+
+        roundPC = if (pC.measuredIn == context.getString(R.string.t)) 2
+        else 0
+
         var r = 1
         var count = roundPB
         while (count > 0) {
@@ -39,5 +47,9 @@ data class WeightCargoService(val context: Context, var v: CalcUnit, var k: Calc
             count--
         }
         pC.value = (pC.value * r).roundToInt().toFloat() / r
+    }
+
+    fun print(kom: String = ""){
+        Log.i("WeightCargoService $kom", "$v \n $k \n (pB) $pB; \n $v1 \n $v2 \n $kP \n $k1 \n $k2 \n (pC) $pC")
     }
 }
