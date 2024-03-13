@@ -1,6 +1,7 @@
 package com.example.engineersmetalcalcs.listItem
 
 import com.example.engineersmetalcalcs.db.entities.Character
+import com.example.engineersmetalcalcs.db.entities.Value
 
 data class CalcUnit(var description: String, var value: Float, var measuredIn: String = "", var type: Int = INPUT){
     companion object{
@@ -9,14 +10,6 @@ data class CalcUnit(var description: String, var value: Float, var measuredIn: S
         const val INPUT_STRONG_MEASURE = 3
         const val OUTPUT = 4
 
-        fun fromCharacters(items: List<Character>): List<CalcUnit>{
-            val calcList = ArrayList<CalcUnit>()
-            for (item in items){
-                val calcUnit = fromCharacters(item)
-                calcList.add(calcUnit)
-            }
-            return calcList
-        }
         fun fromCharacters(item: Character): CalcUnit{
             val calcUnit: CalcUnit = if(!item.isInput){
                 CalcUnit(item.description, item.defaultValue, item.measuredIn, OUTPUT)
@@ -26,6 +19,18 @@ data class CalcUnit(var description: String, var value: Float, var measuredIn: S
                 CalcUnit(item.description, item.defaultValue, item.measuredIn)
             } else{
                 CalcUnit(item.description, item.defaultValue, item.measuredIn, INPUT_COEFICIENT)
+            }
+            return calcUnit
+        }
+        fun fromCharacterAndValue(item: Character, value: Value): CalcUnit{
+            val calcUnit: CalcUnit = if(!item.isInput){
+                CalcUnit(item.description, value.value, value.measuredIn, OUTPUT)
+            } else if(item.isStrongMeasure){
+                CalcUnit(item.description, value.value, value.measuredIn, INPUT_STRONG_MEASURE)
+            } else if(item.measuredIn.isNotEmpty()){
+                CalcUnit(item.description, value.value, value.measuredIn, INPUT)
+            } else{
+                CalcUnit(item.description, value.value, item.measuredIn, INPUT_COEFICIENT)
             }
             return calcUnit
         }

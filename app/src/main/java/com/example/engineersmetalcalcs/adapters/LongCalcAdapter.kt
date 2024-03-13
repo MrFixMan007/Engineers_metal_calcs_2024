@@ -44,10 +44,11 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if(s.toString() != "" && s.toString() != ".") calcUnit.value = s.toString().toFloat()
+                    else calcUnit.value = 0f
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    if(s.toString() != "" && s.toString() != ".") listener.onClick()
+                    listener.onClick()
                 }
             })
 
@@ -99,10 +100,11 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if(s.toString() != "" && s.toString() != ".") calcUnit.value = s.toString().toFloat()
+                    else calcUnit.value = 0f
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    if(s.toString() != "" && s.toString() != ".") listener.onClick()
+                    listener.onClick()
                 }
             })
         }
@@ -131,10 +133,11 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if(s.toString() != "" && s.toString() != ".") calcUnit.value = s.toString().toFloat()
+                    else calcUnit.value = 0f
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    if(s.toString() != "" && s.toString() != ".") listener.onClick()
+                    listener.onClick()
                 }
             })
         }

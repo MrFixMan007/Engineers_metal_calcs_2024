@@ -4,17 +4,15 @@ import android.content.Context
 import android.util.Log
 import com.example.engineersmetalcalcs.R
 import com.example.engineersmetalcalcs.listItem.CalcUnit
-import com.example.engineersmetalcalcs.unitsOfMeasurement.CoefArrayMapper
 import kotlin.math.roundToInt
 
-data class WeightCargoService(val context: Context, var v: CalcUnit, var k: CalcUnit,
-                              var v1: CalcUnit, var v2: CalcUnit, var kP: CalcUnit,
-                              var k1: CalcUnit, var k2: CalcUnit, var pB: CalcUnit,
-                              var pC: CalcUnit, var roundPB: Int = 2, var roundPC: Int = 2)
+data class CalcServiceCargoWeight(val context: Context, var v: CalcUnit, var k: CalcUnit,
+                                  var v1: CalcUnit, var v2: CalcUnit, var kP: CalcUnit,
+                                  var k1: CalcUnit, var k2: CalcUnit, var pB: CalcUnit,
+                                  var pC: CalcUnit, var roundPB: Int = 2, var roundPC: Int = 2)
+    : BaseCalcService(context)
 {
-    fun calculate(){
-        val mapper = CoefArrayMapper(context)
-
+    override fun calculate(){
         var n1 = v.value * mapper.getCoef(v.measuredIn) * k.value
 
         pB.value = n1 / mapper.getCoef(pB.measuredIn) / 1000

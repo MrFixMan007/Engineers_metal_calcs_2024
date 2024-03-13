@@ -2,17 +2,17 @@ package com.example.engineersmetalcalcs
 
 import com.example.engineersmetalcalcs.db.entities.Save
 
-class MyGlobalParameters{
-    companion object{
-        private var instance: MyGlobalParameters? = null
-        @Synchronized
-        fun getInstance(): MyGlobalParameters? {
-            if (instance == null){
-                instance = MyGlobalParameters()
-            }
-            return instance
-        }
+object MyGlobalParameters{
+    private var globalSave: Save? = null
+
+    fun getSave():Save?{
+        return if (globalSave != null) {
+            val save = globalSave
+            globalSave = null
+            save
+        } else null
     }
-    var globalSave: Save? = null
-    var globalListIds: ArrayList<Int> = ArrayList()
+    fun setSave(save: Save){
+        globalSave = save
+    }
 }

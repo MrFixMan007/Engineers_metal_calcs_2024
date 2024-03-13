@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         // this.deleteDatabase("database")
         AppDatabase.getInstance(this)
 
-        MyGlobalParameters.getInstance()
         setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
     }
     override fun onSupportNavigateUp(): Boolean {

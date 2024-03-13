@@ -21,6 +21,9 @@ interface SaveDao {
     @get:Query("SELECT COUNT(*) FROM save")
     val countOfSaves: Int
 
+    @get:Query("SELECT * FROM save ORDER BY ID DESC LIMIT 1")
+    val last: Save
+
     @Insert
     fun insert(obj: Save): Long
     @Insert

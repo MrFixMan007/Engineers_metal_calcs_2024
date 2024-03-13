@@ -15,7 +15,7 @@ data class Save(
     var name: String,
     var date: String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()),
     var typeIdFk: Long,
-    var description: String
+    var description: String = ""
 )
 {
     fun changeName(name: String) {
