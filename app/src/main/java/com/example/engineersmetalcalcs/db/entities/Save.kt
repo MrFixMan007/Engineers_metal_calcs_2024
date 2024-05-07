@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 @Entity(tableName = "save", foreignKeys = [ForeignKey(entity = Type::class,
-    parentColumns = ["id"], childColumns = ["typeIdFk"])]
+    parentColumns = ["id"], childColumns = ["typeIdFk"], onDelete = ForeignKey.CASCADE)]
 )
 data class Save(
     @PrimaryKey(autoGenerate = true)

@@ -3,49 +3,106 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/mainNavigation">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.engineersmetalcalcs.fragments.MainFragment"
-        android:label="@string/main_menu"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_likvidTempMenuFragment"
-            app:destination="@id/likvidTempMenuFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_mainFragment_to_castingMenuFragment"
-            app:destination="@id/castingMenuFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-    <fragment
-        android:id="@+id/likvidTempMenuFragment"
-        android:name="com.example.engineersmetalcalcs.fragments.LikvidTempMenuFragment"
-        android:label="@string/main_menu_button1"
-        tools:layout="@layout/fragment_likvid_temp_menu" />
-    <fragment
-        android:id="@+id/castingMenuFragment"
-        android:name="com.example.engineersmetalcalcs.fragments.CastingMenuFragment"
-        android:label="@string/main_menu_button2"
-        tools:layout="@layout/fragment_casting_menu" >
-        <action
-            android:id="@+id/action_castingMenuFragment_to_cargoWeightFragment"
-            app:destination="@id/cargoWeightFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-    <fragment
-        android:id="@+id/cargoWeightFragment"
-        android:name="com.example.engineersmetalcalcs.fragments.CargoWeightFragment"
-        android:label="@string/calc_weight_of_the_cargo"
-        tools:layout="@layout/fragment_cargo_weight" />
+    <navigation android:id="@+id/guideNavigation"
+        app:startDestination="@id/guideFragment">
+        <fragment
+            android:id="@+id/guideFragment"
+            android:name="com.example.engineersmetalcalcs.fragments.GuideFragment"
+            android:label="@string/guide"
+            tools:layout="@layout/fragment_guide" />
+    </navigation>
+
+    <navigation android:id="@+id/savedCaclsNavigation"
+        app:startDestination="@id/savedCalcsFragment">
+        <fragment
+            android:id="@+id/savedCalcsFragment"
+            android:name="com.example.engineersmetalcalcs.fragments.SavedCalcsFragment"
+            android:label="@string/stored_calcs"
+            tools:layout="@layout/fragment_saved_calcs">
+            <action
+                android:id="@+id/action_savedCalcsFragment_to_cargoWeightFragment"
+                app:destination="@id/cargoWeightFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+        </fragment>
+        <fragment
+            android:id="@+id/cargoWeightFragment"
+            android:name="com.example.engineersmetalcalcs.fragments.CargoWeightFragment"
+            android:label="@string/calc_weight_of_the_cargo"
+            tools:layout="@layout/fragment_cargo_weight" />
+    </navigation>
+
+    <navigation android:id="@+id/mainNavigation"
+        app:startDestination="@id/mainFragment">
+        <fragment
+            android:id="@+id/castingMenuFragment"
+            android:name="com.example.engineersmetalcalcs.fragments.CastingMenuFragment"
+            android:label="@string/main_menu_button2"
+            tools:layout="@layout/fragment_casting_menu">
+            <action
+                android:id="@+id/action_castingMenuFragment_to_cargoWeightFragment"
+                app:destination="@id/cargoWeightFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpToInclusive="false" />
+        </fragment>
+        <fragment
+            android:id="@+id/likvidTempMenuFragment"
+            android:name="com.example.engineersmetalcalcs.fragments.LikvidTempMenuFragment"
+            android:label="@string/main_menu_button1"
+            tools:layout="@layout/fragment_likvid_temp_menu" />
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.example.engineersmetalcalcs.fragments.MainFragment"
+            android:label="@string/main_menu"
+            tools:layout="@layout/fragment_main">
+            <action
+                android:id="@+id/action_mainFragment_to_likvidTempMenuFragment"
+                app:destination="@id/likvidTempMenuFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+            <action
+                android:id="@+id/action_mainFragment_to_castingMenuFragment"
+                app:destination="@id/castingMenuFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+        </fragment>
+        <fragment
+            android:id="@+id/cargoWeightFragment"
+            android:name="com.example.engineersmetalcalcs.fragments.CargoWeightFragment"
+            android:label="@string/calc_weight_of_the_cargo"
+            tools:layout="@layout/fragment_cargo_weight" />
+    </navigation>
+    <action
+        android:id="@+id/action_global_mainNavigation"
+        app:destination="@id/mainNavigation"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_savedCaclsNavigation"
+        app:destination="@id/savedCaclsNavigation"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_guideNavigation"
+        app:destination="@id/guideNavigation"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
 </navigation>

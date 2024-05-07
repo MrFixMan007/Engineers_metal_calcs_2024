@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "value", foreignKeys = [
     ForeignKey(entity = Character::class,
-    parentColumns = ["id"], childColumns = ["characterIdFk"]),
+    parentColumns = ["id"], childColumns = ["characterIdFk"], onDelete = ForeignKey.CASCADE),
     ForeignKey(entity = Save::class,
-        parentColumns = ["id"], childColumns = ["saveIdFk"])
+        parentColumns = ["id"], childColumns = ["saveIdFk"], onDelete = ForeignKey.CASCADE)
     ]
 )
 data class Value(

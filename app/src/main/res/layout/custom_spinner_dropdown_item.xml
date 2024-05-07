@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     android:textColor="@color/secondaryElementsColor"
     android:background="@color/backgroundColor"
-    android:padding="@dimen/textPadding"
+    android:padding="@dimen/textPaddingT1"
     android:textSize="@dimen/t2"
     />

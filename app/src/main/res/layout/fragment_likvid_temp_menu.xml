@@ -39,11 +39,13 @@
             >
 
             <Button
+                android:visibility="invisible"
                 style="@style/CustomBigMenuButton"
                 android:id="@+id/likvid_calc_main_menu_button3"
                 android:text="@string/likvid_calc_main_menu_button3"
                 />
             <Button
+                android:visibility="invisible"
                 style="@style/CustomBigMenuButton"
                 android:id="@+id/likvid_calc_main_menu_button4"
                 android:layout_marginRight="@dimen/marginTopLeft"

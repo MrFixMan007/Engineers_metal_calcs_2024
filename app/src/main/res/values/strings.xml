@@ -3,14 +3,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="calc">Расчёт</string>
     <string name="calc1">Расчёт 1</string>
     <string name="calc2">Расчёт 2</string>
 
     <string name="saved_calcs">Сохранённые расчёты</string>
     <string name="saved_calc">Сохранённый расчёт</string>
-    <string name="saved">сохранено</string>
+    <string name="saved">Сохранено</string>
+    <string name="not_saved">Не удалось сохранить</string>
+    <string name="save">Сохранить</string>
+    <string name="picture">Картинка</string>
 
     <string name="main_menu">Главное меню</string>
+    <string name="turnOff">Выключить</string>
+    <string name="calcs">Расчёты</string>
+    <string name="guide">Справочник</string>
+    <string name="stored_calcs">Хранимые расчёты</string>
     <string name="main_menu_button1">Температура заливки</string>
     <string name="main_menu_button2">Литейный расчёт</string>
     <string name="main_menu_button3">Шихтовка</string>
@@ -23,6 +31,12 @@
     <string name="calc_weight_of_the_cargo">Расчёт массы груза</string>
     <string name="calc_weight_of_the_cargo_with_rods">Расчёт массы груза со стержнями</string>
     <string name="calc_weight_of_the_cargo_without_rods">Расчёт массы груза без стержней</string>
+
+    <string name="date">Дата</string>
+    <string name="description">Описание</string>
+    <string name="schemes">Схемы</string>
+    <string name="name">Название</string>
+    <string name="result">Результат</string>
 
     <string name="C">C</string>
     <string name="Si">Si</string>
@@ -61,7 +75,7 @@
     <string name="confirm">Подтверждение</string>
     <string name="button">Кнопка</string>
 
-<!--    Единицы измерения-->
+    <!--    Единицы измерения-->
     <string name="mm">мм</string>
     <string name="cm">см</string>
     <string name="dm">дм</string>
@@ -78,14 +92,14 @@
     <string name="dm3">дм3</string>
     <string name="m3">м3</string>
 
-<!--    Расчёт массы груза без стержней-->
+    <!--    Расчёт массы груза без стержней-->
     <string-array name="weightCargoArrayWithout">
         <item>Объем полости над отливкой в верхней ПФ до уровня металла в литниковой воронке (V)</item>
         <item>Производственный коэф запаса на удельный вес жидкого металла</item>
         <item>Масса груза для формы без стержней</item>
     </string-array>
 
-<!--    Расчёт массы груза без стержней-->
+    <!--    Расчёт массы груза без стержней-->
     <string-array name="weightCargoArrayWith">
         <item>Объем полости над отливкой в верхней ПФ до уровня металла в литниковой воронке (V)</item>
         <item>Объем стержней без стержневых знаков</item>
@@ -95,7 +109,7 @@
         <item>Масса груза для формы со стержнями</item>
     </string-array>
 
-<!--    Названия единиц расчётов для расчёта массы груза без стрежней-->
+    <!--    Названия единиц расчётов для расчёта массы груза без стрежней-->
     <string name="Weight_V">V</string>
     <string name="Weight_K">K</string>
     <string name="Weight_Pb">Pb</string>
@@ -106,12 +120,11 @@
     <string name="Weight_k1">k1</string>
     <string name="Weight_k2">k2</string>
     <string name="Weight_Pc">Pc</string>
-<!--    Названия единиц расчётов для расчёта массы груза со стержнями-->
+    <!--    Названия единиц расчётов для расчёта массы груза со стержнями-->
 
     <!--    Заголовки types для локальной БД -->
     <string-array name="types">
-        <item>@string/type1</item>
-        <item>@string/type2</item>
+        <item>@string/type01</item>
         <item>@string/type3</item>
         <item>@string/type4</item>
         <item>@string/type5</item>
@@ -125,6 +138,7 @@
         <item>@string/type13</item>
     </string-array>
 
+    <string name="type01">Масса груза</string>
     <string name="type1">Масса груза без стержней</string>
     <string name="type2">Масса груза со стержнями</string>
     <string name="type3">Температура заливки фасонного литья</string>

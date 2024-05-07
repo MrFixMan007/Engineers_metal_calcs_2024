@@ -24,6 +24,9 @@ interface SaveDao {
     @get:Query("SELECT * FROM save ORDER BY ID DESC LIMIT 1")
     val last: Save
 
+    @Query("DELETE FROM save WHERE id = :id")
+    fun deleteById(id: Long)
+
     @Insert
     fun insert(obj: Save): Long
     @Insert

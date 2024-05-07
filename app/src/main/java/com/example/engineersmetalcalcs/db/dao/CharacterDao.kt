@@ -23,6 +23,9 @@ interface CharacterDao {
     @get:Query("SELECT COUNT(*) FROM character")
     val countOfCharacters: Int
 
+    @Query("SELECT * FROM character WHERE typeIdFk = :id AND isInput = 0")
+    fun getResults(id: Long): List<Character>
+
     @Insert
     fun insert(obj: Character): Long
     @Insert

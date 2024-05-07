@@ -33,14 +33,9 @@ class ChapterAdapter(private val listener: Listener): RecyclerView.Adapter<Chapt
         return chapterList.size
     }
 
-    fun addChapter(chapter: Chapter){
-        chapterList.add(chapter)
-        notifyDataSetChanged()
-    }
-
     fun addAll(items: List<Chapter>){
-        chapterList.addAll(items)
-        notifyDataSetChanged()
+        if (chapterList.addAll(items))
+            notifyItemRangeInserted(0, items.size)
     }
 
     interface Listener{

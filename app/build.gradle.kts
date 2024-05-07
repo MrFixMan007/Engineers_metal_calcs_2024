@@ -69,13 +69,10 @@ dependencies {
     testImplementation ("androidx.test:core-ktx:1.5.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.3")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.3")
 
     // navigation component implementation <
-    val navVersion = "2.7.6"
-    // Java language implementation
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    val navVersion = "2.7.7"
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")

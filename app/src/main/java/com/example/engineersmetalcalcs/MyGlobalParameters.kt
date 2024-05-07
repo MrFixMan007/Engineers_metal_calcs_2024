@@ -6,13 +6,17 @@ object MyGlobalParameters{
     private var globalSave: Save? = null
 
     fun getSave():Save?{
-        return if (globalSave != null) {
-            val save = globalSave
-            globalSave = null
-            save
-        } else null
+        return globalSave
     }
     fun setSave(save: Save){
         globalSave = save
+    }
+    fun saveIsNull(): Boolean{
+        return globalSave == null
+    }
+    fun getSaveName(): String{
+        val name = globalSave?.name
+        globalSave = null
+        return name!!
     }
 }

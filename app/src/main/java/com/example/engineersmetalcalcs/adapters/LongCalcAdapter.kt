@@ -26,6 +26,10 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
         private val binding = LongInputWithDescriptionWithSpinnerItemBinding.bind(item)
         fun bind(calcUnit: CalcUnit, listener: Listener) = with(binding){
             descriptionTextView.text = calcUnit.description
+
+            if(calcUnit.value != 0f)
+                inputEditText.setText(calcUnit.value.toString())
+            else inputEditText.setText("")
             inputEditText.setOnKeyListener { v, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                     val inputMethodManager = root.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -82,6 +86,10 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
         private val binding = LongInputWithDescriptionItemBinding.bind(item)
         fun bind(calcUnit: CalcUnit, listener: Listener) = with(binding){
             descriptionTextView.text = calcUnit.description
+
+            if(calcUnit.value != 0f)
+                inputEditText.setText(calcUnit.value.toString())
+            else inputEditText.setText("")
             inputEditText.setOnKeyListener { v, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                     val inputMethodManager = root.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -114,6 +122,10 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
         private val binding = LongInputWithDescriptionWithStrongMeasuringItemBinding.bind(item)
         fun bind(calcUnit: CalcUnit, listener: Listener) = with(binding){
             descriptionTextView.text = calcUnit.description
+
+            if(calcUnit.value != 0f)
+                inputEditText.setText(calcUnit.value.toString())
+            else inputEditText.setText("")
             unitOfMeasurementTextView.text = calcUnit.measuredIn
             inputEditText.setOnKeyListener { v, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
@@ -132,8 +144,12 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
                 ) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if(s.toString() != "" && s.toString() != ".") calcUnit.value = s.toString().toFloat()
-                    else calcUnit.value = 0f
+                    if(s.toString() != "" && s.toString() != ".") {
+                        calcUnit.value = s.toString().toFloat()
+                    }
+                    else {
+                        calcUnit.value = 0f
+                    }
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -237,8 +253,8 @@ class LongCalcAdapter(private val listener: Listener): RecyclerView.Adapter<Recy
     }
 
     fun addAll(items: List<CalcUnit>){
-        calcList.addAll(items)
-        notifyDataSetChanged()
+        if (calcList.addAll(items))
+            notifyItemRangeInserted(0, items.size)
     }
 
     fun updateOutputValue(){

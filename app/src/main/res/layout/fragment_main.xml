@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.MainFragment"
-
     >
 
     <LinearLayout
@@ -60,11 +59,11 @@
             >
 
             <Button
+                android:visibility="invisible"
                 style="@style/CustomBigMenuButton"
                 android:id="@+id/main_menu_button5"
                 android:layout_marginRight="@dimen/marginTopLeft"
                 android:layout_marginBottom="@dimen/marginTopLeft"
-                android:text="@string/main_menu_button5"
                 />
 
         </LinearLayout>

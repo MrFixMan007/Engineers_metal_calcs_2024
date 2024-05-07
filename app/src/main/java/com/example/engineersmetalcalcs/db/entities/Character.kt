@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "character", foreignKeys = [ForeignKey(entity = Type::class,
-    parentColumns = ["id"], childColumns = ["typeIdFk"])]
+    parentColumns = ["id"], childColumns = ["typeIdFk"], onDelete = ForeignKey.CASCADE)]
 )
 data class Character(
     @PrimaryKey(autoGenerate = true)
