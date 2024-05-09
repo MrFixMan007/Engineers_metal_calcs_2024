@@ -5,6 +5,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -15,4 +16,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Engineer's metal calcs"
 include(":app")
- 
+include(":api")
+include(":core")
+include(":core:api")
+include(":core:impl")

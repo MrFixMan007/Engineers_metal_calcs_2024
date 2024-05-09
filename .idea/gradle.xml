@@ -11,7 +11,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/api" />
+            <option value="$PROJECT_DIR$/core/impl" />
+            <option value="$PROJECT_DIR$/feature-cargoingot" />
+            <option value="$PROJECT_DIR$/feature-cargoingot/api" />
+            <option value="$PROJECT_DIR$/feature-cargoingot/impl" />
           </set>
         </option>
       </GradleProjectSettings>

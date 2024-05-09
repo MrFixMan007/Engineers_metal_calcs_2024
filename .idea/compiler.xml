@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="17" />
+    <bytecodeTargetLevel target="17">
+      <module name="Engineer's_metal_calcs.core2.api" target="17" />
+      <module name="Engineer's_metal_calcs.core2.api.main" target="17" />
+      <module name="Engineer's_metal_calcs.core2.api.test" target="17" />
+      <module name="Engineer's_metal_calcs.core2.impl" target="17" />
+      <module name="Engineer's_metal_calcs.core2.impl.main" target="17" />
+      <module name="Engineer's_metal_calcs.core2.impl.test" target="17" />
+      <module name="Engineer's_metal_calcs.mylibrary" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
