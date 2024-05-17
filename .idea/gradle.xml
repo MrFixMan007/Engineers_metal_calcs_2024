@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/feature-listing-all-calcs" />
             <option value="$PROJECT_DIR$/feature-listing-all-calcs/api" />
             <option value="$PROJECT_DIR$/feature-listing-all-calcs/impl" />
+            <option value="$PROJECT_DIR$/feature-listing-all-saves" />
           </set>
         </option>
       </GradleProjectSettings>
