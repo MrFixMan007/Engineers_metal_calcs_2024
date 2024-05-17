@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/rounded_card1"
+    android:layout_marginTop="@dimen/marginTopLeft"
+    android:paddingTop="@dimen/marginTopLeft"
+    android:paddingBottom="@dimen/marginTopLeft"
+    >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/marginTopLeft"
+        >
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/CustomTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/t2"
+            android:textColor="@color/primaryTextColor"
+            />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/CustomTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/marginTopLeft"
+        >
+        <TextView
+            android:id="@+id/date"
+            style="@style/CustomTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textSize="@dimen/t2"
+            android:textColor="@color/primaryTextColor"
+            />
+
+        <TextView
+            android:id="@+id/result"
+            style="@style/CustomTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/result"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/baseline_more_vert_24"/>
+
+</LinearLayout>

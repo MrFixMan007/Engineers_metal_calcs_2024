@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature_listing_all_saves"
+    namespace = "metalcalcs.feature_listing_all_saves"
     compileSdk = 34
 
     defaultConfig {
@@ -22,6 +22,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+    buildFeatures{
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -78,7 +81,7 @@ dependencies {
     testImplementation("io.insert-koin:koin-test:$koinVersion")
     // Koin >
 
-    implementation(project(mapOf("path" to ":feature-listing-all-calcs:api")))
     implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
     implementation(project(mapOf("path" to ":core-ui")))
+    implementation(project(mapOf("path" to ":core:api")))
 }

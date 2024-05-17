@@ -87,6 +87,7 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
         val mapper : StringResourceMapper = get()
         mapper.setValues(get(named("cargoWeight")))
 
+        // TODO: можно перетащить в объявление
         adapter1 = LongCalcAdapter(listener = this, stringResourceMapper = mapper, recyclerViewId = rcViewId1)
         adapter2 = LongCalcAdapter(listener = this, stringResourceMapper = mapper, recyclerViewId = rcViewId2)
 

@@ -48,7 +48,7 @@ class CargoWeightViewModel(
         // TODO: вызываем диалоги сохранения
     }
 
-    fun send(event: CargoWeightEvent1){
+    fun send(event: CargoWeightEvent){
         when (event){
             is SaveCalcEvent -> {
                 save()

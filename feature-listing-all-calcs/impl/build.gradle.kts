@@ -83,4 +83,5 @@ dependencies {
     implementation(project(mapOf("path" to ":feature-listing-all-calcs:api")))
     implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
     implementation(project(mapOf("path" to ":core-ui")))
+    implementation(project(mapOf("path" to ":core:api")))
 }
