@@ -9,7 +9,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class TestCargoWeight {
+class TestCargoWeightNameEnum {
 
     private val appContext = InstrumentationRegistry.getInstrumentation().targetContext
     private var v = CalcUnit("", 0.1f, appContext.getString(R.string.m3))

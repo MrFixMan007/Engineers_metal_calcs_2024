@@ -1,4 +1,4 @@
-package domain.model.calc
+package data.model
 
 enum class TypeEnum {
     WeightOfCargo,

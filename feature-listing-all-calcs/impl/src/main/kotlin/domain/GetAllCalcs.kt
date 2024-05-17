@@ -1,10 +1,10 @@
 package domain
 
-import data.CalcInfo
-import data.CalcRepository
+import data.model.CalcSave
+import data.CalcSaveRepository
 
 class GetAllCalcs {
-    fun invoke(calcRepository : CalcRepository) : List<CalcInfo>{
-        return calcRepository.getAllCalcs()
+    fun invoke(calcSaveRepository : CalcSaveRepository) : List<CalcSave>{
+        return calcSaveRepository.getAllCalcSaves()
     }
 }

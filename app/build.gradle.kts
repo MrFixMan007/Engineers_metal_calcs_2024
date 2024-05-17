@@ -124,5 +124,6 @@ dependencies {
     implementation(project(mapOf("path" to ":feature-listing-all-calcs:impl")))
     implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
     implementation(project(mapOf("path" to ":feature-listing-all-saves")))
+    implementation(project(mapOf("path" to ":db-room")))
 
 }

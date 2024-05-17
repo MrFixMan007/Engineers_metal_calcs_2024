@@ -1,6 +1,8 @@
 package presentation.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -8,10 +10,15 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import metalcalcs.core_ui.R
 import metalcalcs.feature_calc_cargo_weight.databinding.FragmentCargoWeightBinding
 import org.koin.android.ext.android.get
@@ -77,10 +84,51 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         Log.i("onMenuItemSelected fragment", this@CargoWeightFragment.toString())
         when(menuItem.itemId){
-            R.id.save -> vm.send(SaveCalcEvent())
+            R.id.save -> save()
             android.R.id.home -> findNavController().popBackStack()
         }
         return true
+    }
+
+    fun save() {
+        val nameBuilder = AlertDialog.Builder(binding.root.context)
+        nameBuilder.setTitle(R.string.name_item_window)
+        val nameInput = EditText(binding.root.context)
+        nameInput.inputType = InputType.TYPE_CLASS_TEXT
+        nameBuilder.setView(nameInput)
+
+        nameBuilder.setPositiveButton(
+            R.string.ready
+        ) { _, _ ->
+            val descriptionBuilder = AlertDialog.Builder(binding.root.context)
+            descriptionBuilder.setTitle(R.string.description_item_window)
+            val descriptionInput = EditText(binding.root.context)
+            descriptionInput.inputType = InputType.TYPE_CLASS_TEXT
+            descriptionBuilder.setView(descriptionInput)
+
+            descriptionBuilder.setPositiveButton(
+                R.string.ready
+            ) { _, _ ->
+                CoroutineScope(Dispatchers.Main).launch {
+                    if (vm.send(SaveCalcEvent(nameInput.text.toString(), descriptionInput.text.toString()))){
+                        Toast.makeText(context, resources.getString(R.string.saved), Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(context, resources.getString(R.string.not_saved), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            descriptionBuilder.setNegativeButton(
+                R.string.cancel
+            ) { _, _ -> }
+            descriptionBuilder.show()
+        }
+
+        nameBuilder.setNegativeButton(
+            R.string.cancel
+        ) { _, _ -> }
+        nameBuilder.show()
     }
 
     private fun init(){
@@ -117,22 +165,30 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
     override fun onClick(recyclerViewId: AdapterEvent) {
         if (recyclerViewId.rcViewId == rcViewId1){
             if (recyclerViewId.typeEvent == TypeEvent.TextChanged){
-                vm.send(CalcWeightWithoutRods())
-                adapter1.updateOutputValue()
+                CoroutineScope(Dispatchers.Main).launch {
+                    vm.send(CalcWeightWithoutRods())
+                    adapter1.updateOutputValue()
+                }
             }
             else if (recyclerViewId.typeEvent == TypeEvent.MeasureChanged){
-                vm.send(ChangeUnitOfMeasureWithoutRods())
-                adapter1.updateOutputValue()
+                CoroutineScope(Dispatchers.Main).launch {
+                    vm.send(ChangeUnitOfMeasureWithoutRods())
+                    adapter1.updateOutputValue()
+                }
             }
         }
         else if (recyclerViewId.rcViewId == rcViewId2){
             if (recyclerViewId.typeEvent == TypeEvent.TextChanged){
-                vm.send(CalcWeightWithRods())
-                adapter2.updateOutputValue()
+                CoroutineScope(Dispatchers.Main).launch {
+                    vm.send(CalcWeightWithRods())
+                    adapter2.updateOutputValue()
+                }
             }
             else if (recyclerViewId.typeEvent == TypeEvent.MeasureChanged){
-                vm.send(ChangeUnitOfMeasureWithRods())
-                adapter2.updateOutputValue()
+                CoroutineScope(Dispatchers.Main).launch {
+                    vm.send(ChangeUnitOfMeasureWithRods())
+                    adapter2.updateOutputValue()
+                }
             }
         }
     }
