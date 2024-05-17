@@ -1,4 +1,4 @@
-package domain.model.save
+package data.model
 
 import domain.model.calc.TypeEnum
 import java.text.SimpleDateFormat

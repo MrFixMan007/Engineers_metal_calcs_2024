@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/savedCalcsFragment"
         android:name="presentation.fragments.SavedCalcsFragment"
-        android:label="SavedCalcsFragment" >
+        android:label="@string/stored_calcs" >
         <action
             android:id="@+id/action_savedCalcsFragment_to_cargo_weight_nav"
             app:destination="@id/cargo_weight_nav"
