@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cargo_weight_nav"
+    app:startDestination="@id/cargoWeightFragment">
+    <fragment
+        android:id="@+id/cargoWeightFragment"
+        android:name="presentation.fragments.CargoWeightFragment"
+        android:label="@string/calc_weight_of_the_cargo"
+        tools:layout="@layout/fragment_cargo_weight" />
+</navigation>

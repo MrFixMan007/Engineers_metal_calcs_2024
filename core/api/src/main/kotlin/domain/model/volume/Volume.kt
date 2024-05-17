@@ -7,4 +7,5 @@ interface Volume {
     fun cm3() : Float
     fun dm3() : Float
     fun m3 () : Float
+    fun getUnitsOfMeasure(volumeMeasure: VolumeMeasure):Float
 }

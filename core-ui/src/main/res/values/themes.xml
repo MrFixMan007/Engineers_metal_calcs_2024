@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.EngineersMetalCalcs" parent="Theme.MaterialComponents.Light.NoActionBar" >
+        <item name="colorPrimary">@color/primaryElementsColor</item>
+<!--        <item name="colorPrimaryDark">@color/white</item>-->
+<!--        <item name="colorAccent">@color/white</item>-->
+        <item name="colorPrimaryVariant">@color/backgroundColor</item>
+        <item name="android:textColor">@color/secondaryElementsColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="android:windowFullscreen">true</item>
+
+<!--        Цвет верхнего системного статус бара-->
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+<!--        Цвет нижнего системного бара -->
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+<!--        Размер текста по умолчанию-->
+        <item name="android:textSize">@dimen/t3</item>
+        <item name="android:popupMenuStyle">@style/MyPopupStyle</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Other theme attributes -->
+        <item name="colorControlNormal">@color/primaryTextColor</item>
+    </style>
+
+    <style name="CustomPrimaryTextView." parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">@dimen/t3</item>
+    </style>
+
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/secondaryElementsColor</item>
+        <item name="android:textColorHint">@color/secondaryElementsColor</item>
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="backgroundTint">@color/secondaryElementsColor</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="CustomBigMenuButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/rounded_card</item>
+        <item name="android:textSize">@dimen/t1</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">@dimen/marginTopLeft</item>
+        <item name="android:layout_marginLeft">@dimen/marginTopLeft</item>
+    </style>
+
+    <style name="CustomChapterButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/rounded_card</item>
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/marginTopLeft</item>
+        <item name="android:layout_marginLeft">@dimen/marginTopLeft</item>
+        <item name="android:layout_marginRight">@dimen/marginTopLeft</item>
+        <item name="android:padding">@dimen/textPaddingT1</item>
+        <item name="android:inputType">text</item>
+        <item name="android:text">@string/button</item>
+    </style>
+
+    <style name="CustomTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/t3</item>
+        <item name="android:textColor">@color/secondaryElementsColor</item>
+    </style>
+
+    <style name="CustomTextViewTitleT1" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/t1</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">@dimen/textPaddingT2</item>
+        <item name="android:paddingTop">@dimen/textPaddingT2</item>
+        <item name="android:background">@color/primaryElementsColor</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <style name="CustomTextViewTitleT2" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">@dimen/textPaddingT3</item>
+        <item name="android:paddingTop">@dimen/textPaddingT3</item>
+        <item name="android:background">@color/primaryElementsColor</item>
+        <item name="android:layout_marginTop">1dp</item>
+    </style>
+
+    <style name="CustomButtonTitleT2" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">@dimen/t2</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:background">@color/primaryElementsColor</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:minHeight">@dimen/t1</item>
+        <item name="android:maxHeight">@dimen/largeSize</item>
+    </style>
+    
+    <style name="CustomSpinnerDropDownStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textSize">@dimen/t3</item>
+        <item name="android:dropDownWidth">100dp</item>
+        <item name="android:popupBackground">@color/backgroundColor</item>
+    </style>
+
+    <style name="CustomTabLayout" parent="">
+        <item name="tabTextColor">@color/secondaryElementsColor</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:background">@color/primaryElementsColor</item>
+        <item name="tabIndicatorColor">@color/primaryTextColor</item>
+        <item name="tabSelectedTextColor">@color/primaryTextColor</item>
+    </style>
+    
+    <style name="MyPopupStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/rounded_card1</item>
+    </style>
+
+</resources>

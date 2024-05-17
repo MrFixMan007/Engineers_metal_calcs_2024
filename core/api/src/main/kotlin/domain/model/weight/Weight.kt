@@ -7,4 +7,5 @@ interface Weight {
     fun kg(): Float
     fun c(): Float
     fun t(): Float
+    fun getUnitsOfMeasure(weightMeasure: WeightMeasure):Float
 }

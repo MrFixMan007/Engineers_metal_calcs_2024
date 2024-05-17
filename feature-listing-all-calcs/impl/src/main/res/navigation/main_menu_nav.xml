@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu_nav"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="presentation.fragments.MainFragment"
+        android:label="@string/main_menu"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_likvidTempMenuFragment"
+            app:destination="@id/likvidTempMenuFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_castingMenuFragment"
+            app:destination="@id/castingMenuFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/likvidTempMenuFragment"
+        android:name="presentation.fragments.LikvidTempMenuFragment"
+        android:label="@string/main_menu_button1"
+        tools:layout="@layout/fragment_likvid_temp_menu" />
+    <fragment
+        android:id="@+id/castingMenuFragment"
+        android:name="presentation.fragments.CastingMenuFragment"
+        android:label="@string/main_menu_button2"
+        tools:layout="@layout/fragment_casting_menu" >
+        <action
+            android:id="@+id/action_castingMenuFragment_to_cargo_weight_nav"
+            app:destination="@id/cargo_weight_nav"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+    <include app:graph="@navigation/cargo_weight_nav" />
+</navigation>

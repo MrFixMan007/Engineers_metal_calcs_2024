@@ -4,7 +4,7 @@
     <style name="Theme.EngineersMetalCalcs" parent="Theme.MaterialComponents.Light.NoActionBar" >
         <item name="colorPrimary">@color/primaryElementsColor</item>
 <!--        <item name="colorPrimaryDark">@color/white</item>-->
-<!--        <item name="colorAccent">@color/white</item>-->
+<!--        <item name="colorAccent">@color/white</item> TODO: темы должны будут ссылаться на core-ui-->
         <item name="colorPrimaryVariant">@color/backgroundColor</item>
         <item name="android:textColor">@color/secondaryElementsColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
