@@ -7,6 +7,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import presentation.fragments.CargoWeightFragment
+import presentation.mapper.StringResourceMapper
 import presentation.mapper.StringResourcesParam
 import presentation.model.CalcUnit
 import presentation.viewmodel.CargoWeightViewModel
@@ -14,6 +15,8 @@ import presentation.viewmodel.CargoWeightViewModel
 val feature_cargo_weight_module = module {
 
     viewModel<CargoWeightViewModel>{
+        val map : StringResourceMapper = get()
+        map.setValues(get(named("cargoWeight")))
         CargoWeightViewModel(
             calcWeightWithoutRods = get(),
             calcWeightWithRods = get(),
@@ -21,7 +24,8 @@ val feature_cargo_weight_module = module {
             mapper = get(),
             countRoundWith = 2,
             countRoundWithout = 2,
-            saveCalcUseCase = get()
+            saveCalcUseCase = get(),
+            stringResourceMapper = map
         )
     }
 

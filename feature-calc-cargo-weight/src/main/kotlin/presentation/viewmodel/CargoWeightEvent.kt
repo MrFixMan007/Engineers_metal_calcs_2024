@@ -1,5 +1,7 @@
 package presentation.viewmodel
 
+import data.model.CalcSave
+
 
 interface CargoWeightEvent
 
@@ -8,3 +10,5 @@ class CalcWeightWithoutRods() : CargoWeightEvent
 class CalcWeightWithRods() : CargoWeightEvent
 class ChangeUnitOfMeasureWithoutRods() : CargoWeightEvent
 class ChangeUnitOfMeasureWithRods() : CargoWeightEvent
+class ClearAllUnits() : CargoWeightEvent
+class SetSavedCalc(val param: CalcSave) : CargoWeightEvent

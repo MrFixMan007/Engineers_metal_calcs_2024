@@ -7,7 +7,9 @@ import data.model.CalcType
 import data.model.TypeEnum
 import data.model.calcNamesEnum.CargoWeightNameEnum
 import data.model.container.CargoWeightContainer
+import domain.model.volume.VolumeMeasure
 import domain.model.volume.VolumeUnit
+import domain.model.weight.WeightMeasure
 import domain.model.weight.WeightUnit
 import domain.usecase.saveCalc.SaveCalcUseCase
 import domain.usecase.weightCargoWithRods.WeightOfCargoWithRods
@@ -15,6 +17,7 @@ import domain.usecase.weightCargoWithRods.param.WeightOfCargoWithRodsParam
 import domain.usecase.weightCargoWithoutRods.WeightOfCargoWithoutRods
 import domain.usecase.weightCargoWithoutRods.param.WeightOfCargoWithoutRodsParam
 import presentation.mapper.StringMeasureToUnitMapper
+import presentation.mapper.StringResourceMapper
 import presentation.model.CalcUnit
 
 class CargoWeightViewModel(
@@ -23,6 +26,7 @@ class CargoWeightViewModel(
     private val saveCalcUseCase: SaveCalcUseCase,
     private val calcUnitMap: MutableMap<CargoWeightNameEnum, CalcUnit>,
     private val mapper : StringMeasureToUnitMapper,
+    private val stringResourceMapper: StringResourceMapper,
     private val countRoundWith: Int,
     private val countRoundWithout: Int,
 ) : ViewModel() {
@@ -48,6 +52,35 @@ class CargoWeightViewModel(
 
     private fun changeMeasureWith(){
         calcWeightWith()
+    }
+
+    private fun setSavedValues(param: CalcSave){
+        val container = (param.container as CargoWeightContainer)
+        calcUnitMap[CargoWeightNameEnum.Vb]!!.value = container.vB.value
+        calcUnitMap[CargoWeightNameEnum.Vb]!!.measuredIn = stringResourceMapper.getString(container.vB.measuredIn)
+        calcUnitMap[CargoWeightNameEnum.Mb]!!.value = container.mB.value
+        calcUnitMap[CargoWeightNameEnum.Mb]!!.measuredIn = stringResourceMapper.getString(container.mB.measuredIn)
+
+        calcUnitMap[CargoWeightNameEnum.V1c]!!.value = container.v1C.value
+        calcUnitMap[CargoWeightNameEnum.V1c]!!.measuredIn = stringResourceMapper.getString(container.v1C.measuredIn)
+        calcUnitMap[CargoWeightNameEnum.V2c]!!.value = container.v2C.value
+        calcUnitMap[CargoWeightNameEnum.V2c]!!.measuredIn = stringResourceMapper.getString(container.v2C.measuredIn)
+        calcUnitMap[CargoWeightNameEnum.Mc]!!.value = container.mC.value
+        calcUnitMap[CargoWeightNameEnum.Mc]!!.measuredIn = stringResourceMapper.getString(container.mC.measuredIn)
+    }
+
+    fun resetAll(){
+        calcUnitMap[CargoWeightNameEnum.Vb]!!.value = 0f
+        calcUnitMap[CargoWeightNameEnum.Vb]!!.measuredIn = stringResourceMapper.getString(VolumeMeasure.M3)
+        calcUnitMap[CargoWeightNameEnum.Mb]!!.value = 0f
+        calcUnitMap[CargoWeightNameEnum.Mb]!!.measuredIn = stringResourceMapper.getString(WeightMeasure.T)
+
+        calcUnitMap[CargoWeightNameEnum.V1c]!!.value = 0f
+        calcUnitMap[CargoWeightNameEnum.V1c]!!.measuredIn = stringResourceMapper.getString(VolumeMeasure.M3)
+        calcUnitMap[CargoWeightNameEnum.V2c]!!.value = 0f
+        calcUnitMap[CargoWeightNameEnum.V2c]!!.measuredIn = stringResourceMapper.getString(VolumeMeasure.M3)
+        calcUnitMap[CargoWeightNameEnum.Mc]!!.value = 0f
+        calcUnitMap[CargoWeightNameEnum.Mc]!!.measuredIn = stringResourceMapper.getString(WeightMeasure.T)
     }
 
     private suspend fun save(name: String, description: String) : Boolean{
@@ -81,6 +114,12 @@ class CargoWeightViewModel(
             }
             is ChangeUnitOfMeasureWithRods -> {
                 changeMeasureWith()
+            }
+            is SetSavedCalc -> {
+                setSavedValues(event.param)
+            }
+            is ClearAllUnits -> {
+                resetAll()
             }
         }
         return false

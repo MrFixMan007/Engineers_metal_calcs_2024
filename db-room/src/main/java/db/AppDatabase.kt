@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import data.CalcSaveRepository
+import data.model.CalcInfo
 import data.model.CalcSave
 import data.model.TypeEnum
 import data.model.calcNamesEnum.CargoWeightNameEnum
@@ -19,6 +20,9 @@ import db.entities.PossibleValue
 import db.entities.Save
 import db.entities.Type
 import db.entities.Value
+import db.mapper.CalcTypeMapper
+import domain.model.volume.VolumeUnit
+import domain.model.weight.WeightUnit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,8 +59,74 @@ abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
         }
     }
 
-    override fun getAllCalcSaves(): List<CalcSave> {
-        TODO("Not yet implemented")
+    override suspend fun getAllCalcSaves(): List<CalcSave> = withContext(Dispatchers.IO){
+        val typeDao = typeDao()!!
+        val saveDao = saveDao()!!
+        val valueDao = valueDao()!!
+        val characterDao = characterDao()!!
+        val saves = saveDao.all
+
+        val calcSaveList = mutableListOf<CalcSave>()
+
+        saves.forEach { it ->
+            val type = typeDao.getById(it.typeIdFk)
+
+            val characters = characterDao.getAllByTypeIdFk(type.id!!)
+            val vB = characters.find { character -> character.name == CargoWeightNameEnum.Vb.name }
+            val v1C = characters.find { character -> character.name == CargoWeightNameEnum.V1c.name }
+            val v2C = characters.find { character -> character.name == CargoWeightNameEnum.V2c.name }
+            val mB = characters.find { character -> character.name == CargoWeightNameEnum.Mb.name }
+            val mC = characters.find { character -> character.name == CargoWeightNameEnum.Mc.name }
+
+            val vBValue = valueDao.getByCharacterIdFkAndSaveIdFk(vB!!.id!!, it.id!!)
+            val v1CValue = valueDao.getByCharacterIdFkAndSaveIdFk(v1C!!.id!!, it.id!!)
+            val v2CValue = valueDao.getByCharacterIdFkAndSaveIdFk(v2C!!.id!!, it.id!!)
+            val mBValue = valueDao.getByCharacterIdFkAndSaveIdFk(mB!!.id!!, it.id!!)
+            val mCValue = valueDao.getByCharacterIdFkAndSaveIdFk(mC!!.id!!, it.id!!)
+            if (type.name == TypeEnum.WeightOfCargo.name){
+                val container = CargoWeightContainer(
+                    vB = VolumeUnit(CalcTypeMapper.getVolume(vBValue.measuredIn), vBValue.value),
+                    v1C = VolumeUnit(CalcTypeMapper.getVolume(v1CValue.measuredIn), v1CValue.value),
+                    v2C = VolumeUnit(CalcTypeMapper.getVolume(v2CValue.measuredIn), v2CValue.value),
+                    mB = WeightUnit(CalcTypeMapper.getWeight(mBValue.measuredIn), mBValue.value),
+                    mC = WeightUnit(CalcTypeMapper.getWeight(mCValue.measuredIn), mCValue.value),
+                )
+                calcSaveList.add(
+                    CalcSave(
+                        type = CalcTypeMapper.toCalcType(type.name)!!,
+                        name = it.name,
+                        description = it.description,
+                        date = it.date,
+                        container = container
+                    )
+                )
+            }
+        }
+
+        return@withContext calcSaveList
+    }
+
+    override suspend fun getAllCalcInfo(): List<CalcInfo> = withContext(Dispatchers.IO){
+        val typeDao = typeDao()!!
+        val saveDao = saveDao()!!
+        val saves = saveDao.all
+
+        val listCalcInfo = mutableListOf<CalcInfo>()
+
+        saves.forEach {
+            val type = typeDao.getById(it.typeIdFk)
+            listCalcInfo.add(
+                CalcInfo(
+                    type = CalcTypeMapper.toCalcType(type.name)!!,
+                    name = it.name,
+                    description = it.description,
+                    date = it.date,
+                    result = it.result
+                )
+            )
+        }
+
+        return@withContext listCalcInfo
     }
 
     override suspend fun setCalcSave(calcSave: CalcSave): Boolean = withContext(Dispatchers.IO){

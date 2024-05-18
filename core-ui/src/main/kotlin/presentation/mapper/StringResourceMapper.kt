@@ -1,6 +1,9 @@
 package presentation.mapper
 
 import android.content.Context
+import domain.model.length.LengthMeasure
+import domain.model.volume.VolumeMeasure
+import domain.model.weight.WeightMeasure
 import metalcalcs.core_ui.R
 
 class StringResourceMapper(val context: Context,
@@ -24,6 +27,23 @@ class StringResourceMapper(val context: Context,
         context.getString(R.string.cm3) to resIdForArrayVolume,
         context.getString(R.string.dm3) to resIdForArrayVolume,
         context.getString(R.string.m3) to resIdForArrayVolume
+    )
+    private val stringMeasureArrayMap = mutableMapOf(
+        LengthMeasure.Mm to context.getString(R.string.mm),
+        LengthMeasure.Cm to context.getString(R.string.cm),
+        LengthMeasure.Dm to context.getString(R.string.dm),
+        LengthMeasure.M to context.getString(R.string.m),
+        LengthMeasure.Km to context.getString(R.string.km),
+
+        WeightMeasure.G to context.getString(R.string.g),
+        WeightMeasure.Kg to context.getString(R.string.kg),
+        WeightMeasure.C to context.getString(R.string.c),
+        WeightMeasure.T to context.getString(R.string.t),
+
+        VolumeMeasure.Mm3 to context.getString(R.string.mm3),
+        VolumeMeasure.Cm3 to context.getString(R.string.cm3),
+        VolumeMeasure.Dm3 to context.getString(R.string.dm3),
+        VolumeMeasure.M3 to context.getString(R.string.m3)
     )
 
     fun setValues(param: StringResourcesParam){
@@ -49,8 +69,19 @@ class StringResourceMapper(val context: Context,
     }
 
     fun getStringArrayResourceId(input: String): Int {
-
         return stringArrayMap[input]
+            ?: throw IllegalArgumentException("Нет соответствия для строки: $input")
+    }
+    fun getString(input: LengthMeasure): String {
+        return stringMeasureArrayMap[input]
+            ?: throw IllegalArgumentException("Нет соответствия для строки: $input")
+    }
+    fun getString(input: WeightMeasure): String {
+        return stringMeasureArrayMap[input]
+            ?: throw IllegalArgumentException("Нет соответствия для строки: $input")
+    }
+    fun getString(input: VolumeMeasure): String {
+        return stringMeasureArrayMap[input]
             ?: throw IllegalArgumentException("Нет соответствия для строки: $input")
     }
 }

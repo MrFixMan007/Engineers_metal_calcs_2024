@@ -1,5 +1,6 @@
 package presentation.fragments
 
+import GlobalParameter
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
@@ -9,6 +10,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
@@ -19,6 +22,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import metalcalcs.core_ui.R
 import metalcalcs.feature_calc_cargo_weight.databinding.FragmentCargoWeightBinding
 import org.koin.android.ext.android.get
@@ -36,7 +40,9 @@ import presentation.viewmodel.CalcWeightWithoutRods
 import presentation.viewmodel.CargoWeightViewModel
 import presentation.viewmodel.ChangeUnitOfMeasureWithRods
 import presentation.viewmodel.ChangeUnitOfMeasureWithoutRods
+import presentation.viewmodel.ClearAllUnits
 import presentation.viewmodel.SaveCalcEvent
+import presentation.viewmodel.SetSavedCalc
 
 class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
 
@@ -57,11 +63,15 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
     private val rcViewId1 = 0
     private val rcViewId2 = 1
 
+    private var openedSavedCalc = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentCargoWeightBinding.inflate(layoutInflater)
 
-        init()
+        CoroutineScope(Dispatchers.IO).launch {
+            init()
+        }
     }
 
     override fun onCreateView(
@@ -131,13 +141,28 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
         nameBuilder.show()
     }
 
-    private fun init(){
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        if(openedSavedCalc){
+            binding.apply {
+                title.text = ""
+                title.visibility = GONE
+            }
+
+            CoroutineScope(Dispatchers.Main).launch {
+                vm.send(ClearAllUnits())
+            }
+        }
+    }
+
+    private suspend fun init() = withContext(Dispatchers.Main){
         val mapper : StringResourceMapper = get()
         mapper.setValues(get(named("cargoWeight")))
 
         // TODO: можно перетащить в объявление
-        adapter1 = LongCalcAdapter(listener = this, stringResourceMapper = mapper, recyclerViewId = rcViewId1)
-        adapter2 = LongCalcAdapter(listener = this, stringResourceMapper = mapper, recyclerViewId = rcViewId2)
+        adapter1 = LongCalcAdapter(listener = this@CargoWeightFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId1)
+        adapter2 = LongCalcAdapter(listener = this@CargoWeightFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId2)
 
         fragmentList = listOf(
             CargoWeightCalcFragment(
@@ -154,6 +179,14 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
         )
 
         binding.apply {
+            if(!GlobalParameter.saveIsEmpty()){
+                openedSavedCalc = true
+                val calcSave = GlobalParameter.getCalcSave()!!
+                title.text = calcSave.name
+                title.visibility = VISIBLE
+                vm.send(SetSavedCalc(calcSave))
+            }
+
             vPager2.adapter = vpAdapter
             vPager2.isSaveEnabled = false
             TabLayoutMediator(tabLayout, vPager2){
