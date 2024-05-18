@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="presentation.fragments.CargoWeightFragment"
+    tools:context="presentation.fragments.CargoWeightSavedFragment"
     >
 
     <LinearLayout
@@ -15,6 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/CustomTextViewTitleT1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
         <com.google.android.material.tabs.TabLayout
             style="@style/CustomTabLayout"

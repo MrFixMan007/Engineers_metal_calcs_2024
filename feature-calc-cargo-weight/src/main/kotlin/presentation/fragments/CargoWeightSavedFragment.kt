@@ -1,5 +1,6 @@
 package presentation.fragments
 
+import GlobalParameter
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
@@ -19,8 +20,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import metalcalcs.core_ui.R
-import metalcalcs.feature_calc_cargo_weight.databinding.FragmentCargoWeightBinding
+import metalcalcs.feature_calc_cargo_weight.databinding.FragmentCargoWeightSavedBinding
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,22 +35,23 @@ import presentation.mapper.StringResourceMapper
 import presentation.model.CalcUnit
 import presentation.viewmodel.CalcWeightWithRods
 import presentation.viewmodel.CalcWeightWithoutRods
-import presentation.viewmodel.CargoWeightViewModel
+import presentation.viewmodel.CargoWeightSavedViewModel
 import presentation.viewmodel.ChangeUnitOfMeasureWithRods
 import presentation.viewmodel.ChangeUnitOfMeasureWithoutRods
 import presentation.viewmodel.SaveCalcEvent
+import presentation.viewmodel.SetSavedCalc
 
-class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
+class CargoWeightSavedFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
 
-    private lateinit var binding: FragmentCargoWeightBinding
+    private lateinit var binding: FragmentCargoWeightSavedBinding
 
-    private val vm : CargoWeightViewModel by viewModel()
+    private val vm : CargoWeightSavedViewModel by viewModel()
 
     private lateinit var adapter1 : LongCalcAdapter
     private lateinit var adapter2 : LongCalcAdapter
 
-    private val calcUnits1 : List<CalcUnit> by inject(named("calcUnits1 non saved"))
-    private val calcUnits2 : List<CalcUnit> by inject(named("calcUnits2 non saved"))
+    private val calcUnits1 : List<CalcUnit> by inject(named("calcUnits1 saved"))
+    private val calcUnits2 : List<CalcUnit> by inject(named("calcUnits2 saved"))
 
     private lateinit var fragmentList : List<Fragment>
     private lateinit var vpAdapter: VpAdapter
@@ -59,9 +62,11 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentCargoWeightBinding.inflate(layoutInflater)
+        binding = FragmentCargoWeightSavedBinding.inflate(layoutInflater)
 
-        init()
+        CoroutineScope(Dispatchers.IO).launch {
+            init()
+        }
     }
 
     override fun onCreateView(
@@ -82,7 +87,7 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        Log.i("onMenuItemSelected fragment", this@CargoWeightFragment.toString())
+        Log.i("onMenuItemSelected fragment", this@CargoWeightSavedFragment.toString())
         when(menuItem.itemId){
             R.id.save -> save()
             android.R.id.home -> findNavController().popBackStack()
@@ -131,13 +136,12 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
         nameBuilder.show()
     }
 
-    private fun init(){
+    private suspend fun init() = withContext(Dispatchers.Main){
         val mapper : StringResourceMapper = get()
         mapper.setValues(get(named("cargoWeight")))
-
-        // TODO: можно перетащить в объявление
-        adapter1 = LongCalcAdapter(listener = this@CargoWeightFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId1)
-        adapter2 = LongCalcAdapter(listener = this@CargoWeightFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId2)
+        
+        adapter1 = LongCalcAdapter(listener = this@CargoWeightSavedFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId1)
+        adapter2 = LongCalcAdapter(listener = this@CargoWeightSavedFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId2)
 
         fragmentList = listOf(
             CargoWeightCalcFragment(
@@ -154,6 +158,12 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
         )
 
         binding.apply {
+            if(!GlobalParameter.saveIsEmpty()){
+                val calcSave = GlobalParameter.getCalcSave()!!
+                vm.send(SetSavedCalc(calcSave))
+            }
+            title.text = vm.name
+
             vPager2.adapter = vpAdapter
             vPager2.isSaveEnabled = false
             TabLayoutMediator(tabLayout, vPager2){
