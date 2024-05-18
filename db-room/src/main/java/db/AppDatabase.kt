@@ -1,5 +1,6 @@
 package db
 
+import GlobalParameter
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room.databaseBuilder
@@ -7,6 +8,7 @@ import androidx.room.RoomDatabase
 import data.CalcSaveRepository
 import data.model.CalcInfo
 import data.model.CalcSave
+import data.model.SimpleCalcInfo
 import data.model.TypeEnum
 import data.model.calcNamesEnum.CargoWeightNameEnum
 import data.model.container.CargoWeightContainer
@@ -30,7 +32,7 @@ import kotlinx.coroutines.withContext
 
 @Database(entities = [Save::class, Type::class,
     Character::class, Value::class, PossibleValue::class],
-    version = 11)
+    version = 12)
 abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
 
     abstract fun saveDao(): SaveDao?
@@ -183,10 +185,62 @@ abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
                         ),
                     )
                 )
+                GlobalParameter.setSavesChanged()
                 return@withContext true
             }
         }
         return@withContext false
+    }
+
+    override suspend fun setCalcSaveDescription(
+        simpleCalcInfo: SimpleCalcInfo,
+        newDescription: String
+    ): Boolean {
+        val saveDao = saveDao()!!
+        val save = saveDao.getByNameDescriptionDateResult(
+            name = simpleCalcInfo.name,
+            description = simpleCalcInfo.description,
+            date = simpleCalcInfo.date,
+            result = simpleCalcInfo.result.replace("\n", " "),
+        )
+        save.description = newDescription
+        saveDao.update(save)
+        GlobalParameter.setSavesChanged()
+        return true
+    }
+
+    override suspend fun setCalcSaveName(simpleCalcInfo: SimpleCalcInfo, newName: String): Boolean {
+        val saveDao = saveDao()!!
+        val save = saveDao.getByNameDescriptionDateResult(
+            name = simpleCalcInfo.name,
+            description = simpleCalcInfo.description,
+            date = simpleCalcInfo.date,
+            result = simpleCalcInfo.result.replace("\n", " "),
+        )
+        save.name = newName
+        saveDao.update(save)
+        GlobalParameter.setSavesChanged()
+        return true
+    }
+
+    override suspend fun deleteCalcSave(simpleCalcInfo: SimpleCalcInfo): Boolean {
+        val saveDao = saveDao()!!
+        val valueDao = valueDao()!!
+        val characterDao = characterDao()!!
+        val save = saveDao.getByNameDescriptionDateResult(
+            name = simpleCalcInfo.name,
+            description = simpleCalcInfo.description,
+            date = simpleCalcInfo.date,
+            result = simpleCalcInfo.result.replace("\n", " "),
+        )
+        val characters = characterDao.getAllByTypeIdFk(save.typeIdFk)
+        characters.forEach {
+            val value = valueDao.getByCharacterIdFkAndSaveIdFk(it.id!!, save.id!!)
+            valueDao.delete(value)
+        }
+        saveDao.delete(save)
+        GlobalParameter.setSavesChanged()
+        return true
     }
 
     private suspend fun setDefaultValues() = withContext(Dispatchers.IO){

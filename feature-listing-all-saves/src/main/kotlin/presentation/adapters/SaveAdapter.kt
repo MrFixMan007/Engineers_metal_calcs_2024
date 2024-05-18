@@ -10,14 +10,21 @@ import android.widget.EditText
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import data.CalcSaveRepository
+import data.model.SimpleCalcInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import metalcalcs.core_ui.R
 import metalcalcs.feature_listing_all_saves.databinding.SaveListItemBinding
 import presentation.model.SaveItem
 
 
-class SaveAdapter(private val listener: Listener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SaveAdapter(private val listener: Listener,
+                  private val calcSaveRepository: CalcSaveRepository): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val saves = mutableListOf<SaveItem>()
-    class SaveHolder(item: View): RecyclerView.ViewHolder(item){
+    class SaveHolder(item: View,
+                     private val calcSaveRepository: CalcSaveRepository): RecyclerView.ViewHolder(item){
         private val binding = SaveListItemBinding.bind(itemView)
         fun bind(saveItem: SaveItem, listener: Listener) = with(binding){
             name.text = saveItem.name
@@ -33,19 +40,19 @@ class SaveAdapter(private val listener: Listener): RecyclerView.Adapter<Recycler
             }
         }
         private fun showPopupMenu(v: View, listener: Listener, saveItem: SaveItem) {
-//            val view = LayoutInflater.from(v.context).inflate(R.layout.custom_popup_item, binding.root)
-//
-//            val popupMenu = PopupMenu(v.context, view, Gravity.END)
-//            popupMenu.inflate(R.menu.popupmenu)
-//            popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-//                when (item.itemId) {
-//                    R.id.rename -> callRenameItemWindow(saveItem, listener)
-//                    R.id.change_description -> callChangeDescriptionWindow(saveItem, listener)
-//                    R.id.remove -> callRemoveItemWindow(saveItem, listener)
-//                }
-//                true
-//            }
-//            popupMenu.show()
+            val view = LayoutInflater.from(v.context).inflate(metalcalcs.feature_listing_all_saves.R.layout.custom_popup_item, binding.root)
+
+            val popupMenu = PopupMenu(v.context, view, Gravity.END)
+            popupMenu.inflate(metalcalcs.feature_listing_all_saves.R.menu.popupmenu)
+            popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+                when (item.itemId) {
+                    metalcalcs.feature_listing_all_saves.R.id.rename -> callRenameItemWindow(saveItem, listener)
+                    metalcalcs.feature_listing_all_saves.R.id.change_description -> callChangeDescriptionWindow(saveItem, listener)
+                    metalcalcs.feature_listing_all_saves.R.id.remove -> callRemoveItemWindow(saveItem, listener)
+                }
+                true
+            }
+            popupMenu.show()
         }
 
         private fun callRemoveItemWindow(saveItem: SaveItem, listener: Listener) {
@@ -54,7 +61,7 @@ class SaveAdapter(private val listener: Listener): RecyclerView.Adapter<Recycler
             builder.setTitle(R.string.remove_item_window)
             builder.setPositiveButton(
                 R.string.yes
-            ) { _, _ -> listener.deleteSave(saveItem) }
+            ) { _, _ -> deleteSave(saveItem, listener)}
             builder.setNegativeButton(
                 R.string.no
             ) { _, _ -> }
@@ -98,13 +105,56 @@ class SaveAdapter(private val listener: Listener): RecyclerView.Adapter<Recycler
         }
 
         private fun changeDescription(saveItem: SaveItem, listener: Listener, newDescription: String) {
-            saveItem.description = newDescription
-            listener.itemWasChanged(saveItem)
+            if(saveItem.description != newDescription)
+            {
+                val oldDescription = saveItem.description
+                saveItem.description = newDescription
+                listener.itemWasChanged(saveItem)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    calcSaveRepository.setCalcSaveDescription(
+                        SimpleCalcInfo(
+                            name = saveItem.name,
+                            description = oldDescription,
+                            date = saveItem.date,
+                            result = saveItem.result
+                        ), newDescription
+                    )
+                }
+            }
         }
 
         private fun changeName(saveItem: SaveItem, listener: Listener, newName: String) {
-            saveItem.name = newName
-            listener.itemWasChanged(saveItem)
+            if(saveItem.name != newName){
+                val oldName = saveItem.name
+                saveItem.name = newName
+                listener.itemWasChanged(saveItem)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    calcSaveRepository.setCalcSaveName(
+                        SimpleCalcInfo(
+                            name = oldName,
+                            description = saveItem.description,
+                            date = saveItem.date,
+                            result = saveItem.result
+                        ), newName
+                    )
+                }
+            }
+        }
+        private fun deleteSave(saveItem: SaveItem, listener: Listener){
+            listener.deleteSave(saveItem)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                calcSaveRepository.deleteCalcSave(
+                    SimpleCalcInfo(
+                        name = saveItem.name,
+                        description = saveItem.description,
+                        date = saveItem.date,
+                        result = saveItem.result
+                    )
+                )
+            }
         }
     }
 
@@ -130,7 +180,7 @@ class SaveAdapter(private val listener: Listener): RecyclerView.Adapter<Recycler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(metalcalcs.feature_listing_all_saves.R.layout.save_list_item, parent, false)
-        return SaveHolder(view)
+        return SaveHolder(view, calcSaveRepository)
     }
 
     override fun getItemCount(): Int {

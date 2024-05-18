@@ -8,7 +8,8 @@ import presentation.viewmodel.SavesViewModel
 val feature_saved_calcs_module = module {
     viewModel<SavesViewModel> {
         SavesViewModel(
-            allCalcSaves = get(named("calcSaves"))
+            allCalcSaves = get(named("calcSaves")),
+            calcSaveRepository = get()
             )
     }
 }

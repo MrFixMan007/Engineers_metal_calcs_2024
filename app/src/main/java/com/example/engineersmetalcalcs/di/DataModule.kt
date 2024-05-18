@@ -12,7 +12,7 @@ val dataModule = module {
     single <RoomDatabase>{ AppDatabase.getInstance(get()) }
     factory <CalcSaveRepository> { AppDatabase.getInstance(get()) }
 
-    single <List<CalcSave>>(named("calcSaves")){
+    factory <List<CalcSave>>(named("calcSaves")){
         runBlocking {
             get<CalcSaveRepository>().getAllCalcSaves()
         }

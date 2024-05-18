@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import metalcalcs.feature_listing_all_saves.R
 import metalcalcs.feature_listing_all_saves.databinding.FragmentSavedCalcsBinding
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import presentation.adapters.SaveAdapter
 import presentation.model.SaveItem
@@ -28,12 +29,14 @@ class SavedCalcsFragment : Fragment(), SaveAdapter.Listener {
     private val saveItems = mutableListOf<SaveItem>()
     private val calcSaves = mutableListOf<CalcSave>()
 
-    private val adapter = SaveAdapter(this)
+    private val adapter = SaveAdapter(this, get())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentSavedCalcsBinding.inflate(layoutInflater)
 
-        init()
+        CoroutineScope(Dispatchers.Main).launch {
+            init()
+        }
     }
 
     override fun onCreateView(
@@ -49,7 +52,19 @@ class SavedCalcsFragment : Fragment(), SaveAdapter.Listener {
         controller = findNavController()
     }
 
-    private fun init(){
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (GlobalParameter.getSavesChanged()) {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewmodel.update()
+            }
+        }
+    }
+
+    private suspend fun init(){
+        if (GlobalParameter.getSavesChanged()) {
+            viewmodel.update()
+        }
         calcSaves.addAll(viewmodel.allCalcSaves)
 
         calcSaves.forEach {

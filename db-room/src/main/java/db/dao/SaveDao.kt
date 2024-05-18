@@ -12,6 +12,9 @@ interface SaveDao {
     @Query("SELECT * FROM save WHERE id = :id")
     fun getById(id: Long): Save
 
+    @Query("SELECT * FROM save WHERE name = :name AND description = :description AND date = :date AND result = :result")
+    fun getByNameDescriptionDateResult(name: String, description: String, date: String, result: String): Save
+
     @Query("SELECT * FROM save WHERE typeIdFk = :id")
     fun getByTypeIdFk(id: Long): List<Save>
 
