@@ -1,10 +1,10 @@
-package app
+package com.example.engineersmetalcalcs.app
 
 import android.app.Application
 import androidx.room.RoomDatabase
-import di.appModule
-import di.dataModule
-import di.domainModule
+import com.example.engineersmetalcalcs.di.appModule
+import com.example.engineersmetalcalcs.di.dataModule
+import com.example.engineersmetalcalcs.di.domainModule
 import data.model.CalcSave
 import di.casting_menu_module
 import di.core_uiModule

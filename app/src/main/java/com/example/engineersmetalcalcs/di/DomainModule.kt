@@ -1,4 +1,4 @@
-package di
+package com.example.engineersmetalcalcs.di
 
 import calculation.CalcWeightOfCargoWithRods
 import calculation.CalcWeightOfCargoWithoutRods
