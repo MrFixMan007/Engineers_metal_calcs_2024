@@ -136,8 +136,10 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
         mapper.setValues(get(named("cargoWeight")))
 
         // TODO: можно перетащить в объявление
-        adapter1 = LongCalcAdapter(listener = this@CargoWeightFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId1)
-        adapter2 = LongCalcAdapter(listener = this@CargoWeightFragment, stringResourceMapper = mapper, recyclerViewId = rcViewId2)
+        adapter1 = LongCalcAdapter(listener = this@CargoWeightFragment,
+            stringResourceMapper = mapper, recyclerViewId = rcViewId1)
+        adapter2 = LongCalcAdapter(listener = this@CargoWeightFragment,
+            stringResourceMapper = mapper, recyclerViewId = rcViewId2)
 
         fragmentList = listOf(
             CargoWeightCalcFragment(

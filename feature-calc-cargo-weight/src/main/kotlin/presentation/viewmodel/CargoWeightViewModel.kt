@@ -42,14 +42,6 @@ class CargoWeightViewModel(
         calcUnitMap[CargoWeightNameEnum.Mc]!!.value = Round.invoke(result.getUnitsOfMeasure(mapper.getWeight(calcUnitMap[CargoWeightNameEnum.Mc]!!.measuredIn)), countRoundWith)
     }
 
-    private fun changeMeasureWithout(){
-        calcWeightWithout()
-    }
-
-    private fun changeMeasureWith(){
-        calcWeightWith()
-    }
-
     private suspend fun save(name: String, description: String) : Boolean{
         return saveCalcUseCase.invoke(CalcSave(
             type = CalcType(TypeEnum.WeightOfCargo),
@@ -63,6 +55,14 @@ class CargoWeightViewModel(
                 mC = WeightUnit(mapper.getWeight(calcUnitMap[CargoWeightNameEnum.Mc]!!.measuredIn), calcUnitMap[CargoWeightNameEnum.Mc]!!.value),
             )
         ))
+    }
+
+    private fun changeMeasureWithout(){
+        calcWeightWithout()
+    }
+
+    private fun changeMeasureWith(){
+        calcWeightWith()
     }
 
     suspend fun send(event: CargoWeightEvent) : Boolean{

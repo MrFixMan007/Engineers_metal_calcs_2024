@@ -28,7 +28,10 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             printLogger()
             androidContext(this@App)
-            modules(listOf(appModule, domainModule, dataModule, feature_cargo_weight_module, core_uiModule, casting_menu_module, feature_saved_calcs_module))
+            modules(listOf(appModule, domainModule,
+                dataModule, feature_cargo_weight_module,
+                core_uiModule, casting_menu_module,
+                feature_saved_calcs_module))
             get<RoomDatabase>()
 
             CoroutineScope(Dispatchers.IO).launch {
