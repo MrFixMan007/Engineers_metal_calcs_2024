@@ -1,10 +1,10 @@
-package com.example.engineersmetalcalcs.app
+package app
 
 import android.app.Application
 import androidx.room.RoomDatabase
-import com.example.engineersmetalcalcs.di.appModule
-import com.example.engineersmetalcalcs.di.dataModule
-import com.example.engineersmetalcalcs.di.domainModule
+import di.appModule
+import di.dataModule
+import di.domainModule
 import data.model.CalcSave
 import di.casting_menu_module
 import di.core_uiModule
@@ -28,7 +28,8 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             printLogger()
             androidContext(this@App)
-            modules(listOf(appModule, domainModule,
+            modules(listOf(
+                appModule, domainModule,
                 dataModule, feature_cargo_weight_module,
                 core_uiModule, casting_menu_module,
                 feature_saved_calcs_module))

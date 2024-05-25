@@ -1,4 +1,4 @@
-package com.example.engineersmetalcalcs.di
+package di
 
 import androidx.room.RoomDatabase
 import data.CalcSaveRepository

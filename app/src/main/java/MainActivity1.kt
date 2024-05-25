@@ -1,11 +1,10 @@
-package com.example.engineersmetalcalcs
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.engineersmetalcalcs.R
 import com.example.engineersmetalcalcs.databinding.ActivityMain1Binding
 
 class MainActivity1 : AppCompatActivity() {
