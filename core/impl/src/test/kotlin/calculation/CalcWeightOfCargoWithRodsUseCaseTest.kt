@@ -5,9 +5,9 @@ import domain.usecase.weightCargoWithRods.inputParam.WeightOfCargoWithRodsParam
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CalcWeightOfCargoWithRodsTest{
+class CalcWeightOfCargoWithRodsUseCaseTest{
 
-    private val cargoIngot = CalcWeightOfCargoWithRods()
+    private val cargoIngot = CalcWeightOfCargoWithRodsUseCase()
 
     @Test
     fun `must return 0,64 tons`(){

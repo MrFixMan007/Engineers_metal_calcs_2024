@@ -5,8 +5,8 @@ import domain.usecase.temperatureIngot.outputParam.TemperatureIngotOutputParam
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CalcTemperatureIngotTest{
-    private val temperatureIngot = CalcTemperatureIngot()
+class CalcTemperatureIngotUseCaseTest{
+    private val temperatureIngot = CalcTemperatureIngotUseCase()
 
     @Test
     fun `must return 1502,075`(){

@@ -120,9 +120,12 @@ dependencies {
     implementation(project(mapOf("path" to ":core-ui")))
     implementation(project(mapOf("path" to ":core:api")))
     implementation(project(mapOf("path" to ":core:impl")))
-    implementation(project(mapOf("path" to ":feature-listing-all-calcs")))
-    implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
-    implementation(project(mapOf("path" to ":feature-listing-all-saves")))
     implementation(project(mapOf("path" to ":db-room")))
+
+    implementation(project(mapOf("path" to ":feature-listing-all-calcs")))
+    implementation(project(mapOf("path" to ":feature-listing-all-saves")))
+    
+    implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
+    implementation(project(mapOf("path" to ":feature-calc-temp-likvidus")))
 
 }

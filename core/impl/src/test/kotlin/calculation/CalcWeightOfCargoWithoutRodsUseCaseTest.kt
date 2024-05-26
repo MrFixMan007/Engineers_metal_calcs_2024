@@ -7,9 +7,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 
-class CalcWeightOfCargoWithoutRodsTest {
+class CalcWeightOfCargoWithoutRodsUseCaseTest {
 
-    private val cargoIngot = CalcWeightOfCargoWithoutRods()
+    private val cargoIngot = CalcWeightOfCargoWithoutRodsUseCase()
 
     @Test
     fun `must return 0,91 tons`() {

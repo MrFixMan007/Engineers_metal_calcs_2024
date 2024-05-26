@@ -29,7 +29,15 @@
         android:id="@+id/likvidTempMenuFragment"
         android:name="presentation.fragments.LikvidTempMenuFragment"
         android:label="@string/main_menu_button1"
-        tools:layout="@layout/fragment_likvid_temp_menu" />
+        tools:layout="@layout/fragment_likvid_temp_menu" >
+        <action
+            android:id="@+id/action_likvidTempMenuFragment_to_fason_nav"
+            app:destination="@id/fason_nav"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/castingMenuFragment"
         android:name="presentation.fragments.CastingMenuFragment"
@@ -45,4 +53,5 @@
             />
     </fragment>
     <include app:graph="@navigation/cargo_weight_nav" />
+    <include app:graph="@navigation/fason_calc_nav" />
 </navigation>

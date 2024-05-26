@@ -12,7 +12,7 @@ val casting_menu_module = module {
             Chapter(
                 title = get<Context>().resources.getString(metalcalcs.core_ui.R.string.calc_weight_of_the_cargo),
                 resIdWhereNavigate = R.id.action_castingMenuFragment_to_cargo_weight_nav
-            )
+            ),
         )
     }
 }

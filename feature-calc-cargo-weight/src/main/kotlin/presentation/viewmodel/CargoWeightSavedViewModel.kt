@@ -10,17 +10,17 @@ import data.model.container.CargoWeightContainer
 import domain.model.volume.VolumeUnit
 import domain.model.weight.WeightUnit
 import domain.usecase.saveCalc.SaveCalcUseCase
-import domain.usecase.weightCargoWithRods.WeightOfCargoWithRods
+import domain.usecase.weightCargoWithRods.WeightOfCargoWithRodsUseCase
 import domain.usecase.weightCargoWithRods.inputParam.WeightOfCargoWithRodsParam
-import domain.usecase.weightCargoWithoutRods.WeightOfCargoWithoutRods
+import domain.usecase.weightCargoWithoutRods.WeightOfCargoWithoutRodsUseCase
 import domain.usecase.weightCargoWithoutRods.inputParam.WeightOfCargoWithoutRodsParam
 import presentation.mapper.StringMeasureToUnitMapper
 import presentation.mapper.StringResourceMapper
 import presentation.model.CalcUnit
 
 class CargoWeightSavedViewModel(
-    private val calcWeightWithRods: WeightOfCargoWithRods,
-    private val calcWeightWithoutRods: WeightOfCargoWithoutRods,
+    private val calcWeightWithRods: WeightOfCargoWithRodsUseCase,
+    private val calcWeightWithoutRods: WeightOfCargoWithoutRodsUseCase,
     private val saveCalcUseCase: SaveCalcUseCase,
     private val calcUnitMap: MutableMap<CargoWeightNameEnum, CalcUnit>,
     private val mapper : StringMeasureToUnitMapper,

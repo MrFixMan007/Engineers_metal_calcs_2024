@@ -80,9 +80,7 @@ class LongCalcAdapter(private val listener: Listener,
                     listener.onClick(AdapterEvent(recyclerViewId, TypeEvent.MeasureChanged))
                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
         }
     }

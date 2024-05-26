@@ -1,11 +1,11 @@
 package calculation
 
-import domain.usecase.temperatureIngot.TemperatureIngot
-import domain.usecase.temperatureIngot.inputParam.TemperatureIngotInputParam
-import domain.usecase.temperatureIngot.outputParam.TemperatureIngotOutputParam
+import domain.usecase.temperatureFason.TemperatureFasonUseCase
+import domain.usecase.temperatureFason.inputParam.TemperatureFasonInputParam
+import domain.usecase.temperatureFason.outputParam.TemperatureFasonOutputParam
 
-class CalcTemperatureIngot : TemperatureIngot{
-    override fun invoke(param: TemperatureIngotInputParam): TemperatureIngotOutputParam {
+class CalcTemperatureFasonUseCase : TemperatureFasonUseCase{
+    override fun invoke(param: TemperatureFasonInputParam): TemperatureFasonOutputParam {
 
         val ti = if (param.ti < 0.02f) 0f else param.ti
         val s = if (param.s < 0.02f) 0f else param.s
@@ -24,7 +24,7 @@ class CalcTemperatureIngot : TemperatureIngot{
 
         val res = temp - coef_w * w - coef_cr * cr - coef_co * co - coef_mo * mo - coef_v * v - coef_al * al - coef_ni * ni - coef_mn * param.mn - coef_cu * cu - coef_si * param.si - coef_ti * ti - coef_s * s - coef_p * p - coef_c * param.c
 
-        return TemperatureIngotOutputParam(
+        return TemperatureFasonOutputParam(
             res = res,
             resLower = res + coefLower,
             resUpper = res + coefUpper,
@@ -35,10 +35,10 @@ class CalcTemperatureIngot : TemperatureIngot{
     companion object{
         private const val temp = 1537f
 
-        private const val coefLower = 100
-        private const val coefUpper = 120
-        private const val coefLowerInFurnace = 140
-        private const val coefUpperInFurnace = 160
+        private const val coefLower = 50
+        private const val coefUpper = 70
+        private const val coefLowerInFurnace = 90
+        private const val coefUpperInFurnace = 110
 
         private const val coef_w = 1
         private const val coef_cr = 1.5f

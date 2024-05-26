@@ -5,8 +5,8 @@ import domain.usecase.temperatureFason.outputParam.TemperatureFasonOutputParam
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CalcTemperatureFasonTest{
-    private val temperatureFason = CalcTemperatureFason()
+class CalcTemperatureFasonUseCaseTest{
+    private val temperatureFason = CalcTemperatureFasonUseCase()
 
     @Test
     fun `must return 1502,075`(){

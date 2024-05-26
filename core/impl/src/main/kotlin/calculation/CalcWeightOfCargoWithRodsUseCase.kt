@@ -2,10 +2,10 @@ package calculation
 
 import domain.model.weight.Weight
 import domain.model.weight.WeightUnit
-import domain.usecase.weightCargoWithRods.WeightOfCargoWithRods
+import domain.usecase.weightCargoWithRods.WeightOfCargoWithRodsUseCase
 import domain.usecase.weightCargoWithRods.inputParam.WeightOfCargoWithRodsParam
 
-class CalcWeightOfCargoWithRods : WeightOfCargoWithRods {
+class CalcWeightOfCargoWithRodsUseCase : WeightOfCargoWithRodsUseCase {
     override fun invoke(param: WeightOfCargoWithRodsParam): Weight {
         return WeightUnit.t((k1 * param.vDo.m3() + k2 * param.vBez.m3()) * coef)
     }

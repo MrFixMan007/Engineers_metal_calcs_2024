@@ -3,4 +3,4 @@ package domain.usecase.temperatureIngot
 import domain.usecase.temperatureIngot.inputParam.TemperatureIngotInputParam
 import domain.usecase.temperatureIngot.outputParam.TemperatureIngotOutputParam
 
-interface TemperatureIngot : (TemperatureIngotInputParam) -> TemperatureIngotOutputParam
+interface TemperatureIngotUseCase : (TemperatureIngotInputParam) -> TemperatureIngotOutputParam

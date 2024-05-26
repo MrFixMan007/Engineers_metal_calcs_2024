@@ -51,8 +51,7 @@ class MainFragment : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.turnOff -> {
-                activity?.finish() //TODO: закрывает, но на фоне остается
-                Log.i("fg", "Main1 ЛОГ")
+                activity?.finish()
             }
         }
         return true
