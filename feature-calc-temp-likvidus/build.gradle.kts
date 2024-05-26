@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "metalcalcs.feature_calc_cargo_weight"
+    namespace = "metalcalcs.feature_calc_temp_likvidus"
     compileSdk = 34
 
     defaultConfig {
@@ -12,10 +12,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildFeatures{
-        viewBinding = true
     }
 
     buildTypes {
