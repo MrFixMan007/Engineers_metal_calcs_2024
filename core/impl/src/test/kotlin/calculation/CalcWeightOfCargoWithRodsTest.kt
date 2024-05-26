@@ -1,7 +1,7 @@
 package calculation
 
 import domain.model.volume.VolumeUnit
-import domain.usecase.weightCargoWithRods.param.WeightOfCargoWithRodsParam
+import domain.usecase.weightCargoWithRods.inputParam.WeightOfCargoWithRodsParam
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

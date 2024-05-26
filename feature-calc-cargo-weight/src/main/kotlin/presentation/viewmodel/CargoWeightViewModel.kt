@@ -11,9 +11,9 @@ import domain.model.volume.VolumeUnit
 import domain.model.weight.WeightUnit
 import domain.usecase.saveCalc.SaveCalcUseCase
 import domain.usecase.weightCargoWithRods.WeightOfCargoWithRods
-import domain.usecase.weightCargoWithRods.param.WeightOfCargoWithRodsParam
+import domain.usecase.weightCargoWithRods.inputParam.WeightOfCargoWithRodsParam
 import domain.usecase.weightCargoWithoutRods.WeightOfCargoWithoutRods
-import domain.usecase.weightCargoWithoutRods.param.WeightOfCargoWithoutRodsParam
+import domain.usecase.weightCargoWithoutRods.inputParam.WeightOfCargoWithoutRodsParam
 import presentation.mapper.StringMeasureToUnitMapper
 import presentation.model.CalcUnit
 

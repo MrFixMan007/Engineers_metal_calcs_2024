@@ -1,4 +1,4 @@
-package domain.usecase.weightCargoWithoutRods.param
+package domain.usecase.weightCargoWithoutRods.inputParam
 
 import domain.model.volume.Volume
 

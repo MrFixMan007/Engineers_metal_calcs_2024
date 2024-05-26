@@ -3,7 +3,7 @@ package calculation
 import domain.model.weight.Weight
 import domain.model.weight.WeightUnit
 import domain.usecase.weightCargoWithRods.WeightOfCargoWithRods
-import domain.usecase.weightCargoWithRods.param.WeightOfCargoWithRodsParam
+import domain.usecase.weightCargoWithRods.inputParam.WeightOfCargoWithRodsParam
 
 class CalcWeightOfCargoWithRods : WeightOfCargoWithRods {
     override fun invoke(param: WeightOfCargoWithRodsParam): Weight {

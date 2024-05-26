@@ -2,7 +2,7 @@ package calculation
 
 import domain.model.volume.VolumeMeasure
 import domain.model.volume.VolumeUnit
-import domain.usecase.weightCargoWithoutRods.param.WeightOfCargoWithoutRodsParam
+import domain.usecase.weightCargoWithoutRods.inputParam.WeightOfCargoWithoutRodsParam
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
