@@ -16,7 +16,9 @@ class PercentMetalAdapter(private val listener: Listener): RecyclerView.Adapter<
         private val binding = PercentMetalListItemBinding.bind(item)
         fun bind(percentMetalModel: PercentMetalModel, listener: Listener) = with(binding){
             name.text = percentMetalModel.name
-            value.setText(percentMetalModel.value.toString())
+
+            if (percentMetalModel.value == 0f) value.setText("0.")
+            else value.setText(percentMetalModel.value.toString())
 
             value.addTextChangedListener(object : TextWatcher{
                 override fun beforeTextChanged(

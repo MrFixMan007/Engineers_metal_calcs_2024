@@ -12,10 +12,11 @@
 
     <EditText
         android:id="@+id/value"
+        android:textColor="@color/primaryTextColor"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20sp"
-        android:inputType="number"/>
+        android:inputType="numberDecimal"/>
 
 </LinearLayout>

@@ -82,6 +82,7 @@ dependencies {
     // Koin >
 
     implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
+    implementation(project(mapOf("path" to ":feature-calc-temp-likvidus")))
     implementation(project(mapOf("path" to ":core-ui")))
     implementation(project(mapOf("path" to ":core:api")))
 }

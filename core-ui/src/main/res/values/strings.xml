@@ -73,6 +73,7 @@
     <string name="ready">Готово</string>
     <string name="confirm">Подтверждение</string>
     <string name="button">Кнопка</string>
+    <string name="text">Текст</string>
 
     <!--    Единицы измерения-->
     <string name="mm">мм</string>

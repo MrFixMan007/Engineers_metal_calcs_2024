@@ -43,6 +43,8 @@ object CalcTypeMapper {
     fun toCalcType(nameType: String): CalcType?{
         when (nameType){
             TypeEnum.WeightOfCargo.name -> return CalcType(TypeEnum.WeightOfCargo)
+            TypeEnum.TemperatureFason.name -> return CalcType(TypeEnum.TemperatureFason)
+            TypeEnum.TemperatureIngot.name -> return CalcType(TypeEnum.TemperatureIngot)
         }
         return null
     }

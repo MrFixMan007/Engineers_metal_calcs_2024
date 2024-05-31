@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="res">Температура Ликвидус</string>
+    <string name="col2">Температура заливки</string>
+    <string name="col3">Температура в печи</string>
+    <string name="col11">Нижнее значение</string>
+    <string name="col12">Верхнее значение</string>
+</resources>

@@ -162,6 +162,10 @@ class SaveAdapter(private val listener: Listener,
         if (saves.addAll(items))
             notifyItemRangeInserted(0, items.size)
     }
+    fun add(item: SaveItem){
+        if (saves.add(item))
+            notifyItemRangeInserted(saves.size - 1, 1)
+    }
     fun deleteItem(item: SaveItem) {
         val index = saves.indexOf(item)
         saves.remove(item)

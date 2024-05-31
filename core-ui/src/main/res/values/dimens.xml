@@ -2,14 +2,14 @@
 <resources>
     <dimen name="round">10dp</dimen>
 
-    <dimen name="t1">20dp</dimen>
-    <dimen name="t2">15dp</dimen>
-    <dimen name="t3">12dp</dimen>
-    <dimen name="t4">10dp</dimen>
-    <dimen name="largeSize">25dp</dimen>
+    <dimen name="t1">20sp</dimen>
+    <dimen name="t2">15sp</dimen>
+    <dimen name="t3">12sp</dimen>
+    <dimen name="t4">10sp</dimen>
+    <dimen name="largeSize">25sp</dimen>
 
     <dimen name="tinyMargin">1dp</dimen>
-    <dimen name="marginTopLeft">5dp</dimen>
+    <dimen name="marginTopLeft">4dp</dimen>
     <dimen name="textPaddingT1">8dp</dimen>
     <dimen name="textPaddingT2">4dp</dimen>
     <dimen name="textPaddingT3">2dp</dimen>

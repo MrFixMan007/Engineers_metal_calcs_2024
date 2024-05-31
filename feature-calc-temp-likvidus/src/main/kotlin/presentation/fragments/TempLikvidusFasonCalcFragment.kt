@@ -2,7 +2,6 @@ package presentation.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -14,36 +13,35 @@ import android.widget.Toast
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import data.model.calcNamesEnum.TempLikvidusNameEnum
+import domain.usecase.temperatureFason.inputParam.TemperatureFasonInputParam
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import metalcalcs.core_ui.R
-import metalcalcs.feature_calc_temp_likvidus.databinding.FragmentTempLikvidusCalcBinding
+import metalcalcs.feature_calc_temp_likvidus.databinding.FragmentTempLikvidusFasonCalcBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 import presentation.adapter.PercentMetalAdapter
-import presentation.adapters.LongCalcAdapter
-import presentation.model.CalcUnit
 import presentation.model.PercentMetalModel
-import presentation.viewmodel.SaveCalcEvent
+import presentation.viewmodel.CalcFasonEvent
+import presentation.viewmodel.SaveCalcTempLikvidFasonEvent
 import presentation.viewmodel.TempLikvidusFasonViewModel
 
-class TempLikvidusFasonCalcFragment  : Fragment(), PercentMetalAdapter.Listener, MenuProvider {
+class TempLikvidusFasonCalcFragment : Fragment(), PercentMetalAdapter.Listener, MenuProvider {
 
-    private lateinit var binding: FragmentTempLikvidusCalcBinding
+    private lateinit var binding: FragmentTempLikvidusFasonCalcBinding
 
     private val vm : TempLikvidusFasonViewModel by viewModel()
     private val percentMetalMap: MutableMap<TempLikvidusNameEnum, PercentMetalModel> by inject(named("percentMetalsFason"))
 
     private lateinit var adapter : PercentMetalAdapter
 
-//    private val calcUnits1 : List<CalcUnit> by inject(named("calcUnits1 non saved"))
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentTempLikvidusCalcBinding.inflate(layoutInflater)
+        binding = FragmentTempLikvidusFasonCalcBinding.inflate(layoutInflater)
 
         init()
     }
@@ -62,7 +60,40 @@ class TempLikvidusFasonCalcFragment  : Fragment(), PercentMetalAdapter.Listener,
     }
 
     override fun onValueChanged(item: PercentMetalModel) {
-        TODO("Not yet implemented")
+        if (percentMetalMap.all { it.value.value == 0f }){
+            binding.apply {
+                res.text = ""
+                resLower.text = ""
+                resUpper.text = ""
+                resLowerInFurnace.text = ""
+                resUpperInFurnace.text = ""
+            }
+        }
+        else
+        {
+            CoroutineScope(Dispatchers.Main).launch {
+                vm.send(
+                    CalcFasonEvent(
+                        TemperatureFasonInputParam(
+                            w = percentMetalMap[TempLikvidusNameEnum.W]!!.value,
+                            cr = percentMetalMap[TempLikvidusNameEnum.Cr]!!.value,
+                            co = percentMetalMap[TempLikvidusNameEnum.Co]!!.value,
+                            mo = percentMetalMap[TempLikvidusNameEnum.Mo]!!.value,
+                            v = percentMetalMap[TempLikvidusNameEnum.V]!!.value,
+                            al = percentMetalMap[TempLikvidusNameEnum.Al]!!.value,
+                            ni = percentMetalMap[TempLikvidusNameEnum.Ni]!!.value,
+                            mn = percentMetalMap[TempLikvidusNameEnum.Mn]!!.value,
+                            cu = percentMetalMap[TempLikvidusNameEnum.Cu]!!.value,
+                            si = percentMetalMap[TempLikvidusNameEnum.Si]!!.value,
+                            ti = percentMetalMap[TempLikvidusNameEnum.Ti]!!.value,
+                            s = percentMetalMap[TempLikvidusNameEnum.S]!!.value,
+                            p = percentMetalMap[TempLikvidusNameEnum.P]!!.value,
+                            c = percentMetalMap[TempLikvidusNameEnum.C]!!.value,
+                        )
+                    )
+                )
+            }
+        }
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -84,31 +115,54 @@ class TempLikvidusFasonCalcFragment  : Fragment(), PercentMetalAdapter.Listener,
 
         binding.apply {
             rcViewTempLikvidus.adapter = adapter
+            rcViewTempLikvidus.layoutManager = GridLayoutManager(context, 3)
             adapter.addAll(listPercentMetal)
+
+            vm.resultLive.observe(this@TempLikvidusFasonCalcFragment) { state ->
+                res.text = "${state.res}"
+                resLower.text = "${state.resLower}"
+                resUpper.text = "${state.resUpper}"
+                resLowerInFurnace.text = "${state.resLowerInFurnace}"
+                resUpperInFurnace.text = "${state.resUpperInFurnace}"
+            }
         }
     }
 
     private fun save() {
-        val nameBuilder = AlertDialog.Builder(binding.root.context)
-        nameBuilder.setTitle(R.string.name_item_window)
-        val nameInput = EditText(binding.root.context)
-        nameInput.inputType = InputType.TYPE_CLASS_TEXT
-        nameBuilder.setView(nameInput)
+        val builder = AlertDialog.Builder(context)
 
-        nameBuilder.setPositiveButton(
-            R.string.ready
-        ) { _, _ ->
-            val descriptionBuilder = AlertDialog.Builder(binding.root.context)
-            descriptionBuilder.setTitle(R.string.description_item_window)
-            val descriptionInput = EditText(binding.root.context)
-            descriptionInput.inputType = InputType.TYPE_CLASS_TEXT
-            descriptionBuilder.setView(descriptionInput)
+        val customLayout: View = layoutInflater.inflate(R.layout.custom_alert_dialog, null)
+        builder.setView(customLayout)
 
-            descriptionBuilder.setPositiveButton(
-                R.string.ready
-            ) { _, _ ->
+        val nameInput = customLayout.findViewById<EditText>(R.id.nameOfSave)
+        val descriptionInput = customLayout.findViewById<EditText>(R.id.descriptionOfSave)
+
+        builder
+            .setPositiveButton(R.string.ready)
+            { _, _ ->
                 CoroutineScope(Dispatchers.Main).launch {
-                    if (vm.send(SaveCalcEvent(nameInput.text.toString(), descriptionInput.text.toString()))){
+                    val saveCalcEvent = SaveCalcTempLikvidFasonEvent(
+                        param = TemperatureFasonInputParam(
+                            w = percentMetalMap[TempLikvidusNameEnum.W]!!.value,
+                            cr = percentMetalMap[TempLikvidusNameEnum.Cr]!!.value,
+                            co = percentMetalMap[TempLikvidusNameEnum.Co]!!.value,
+                            mo = percentMetalMap[TempLikvidusNameEnum.Mo]!!.value,
+                            v = percentMetalMap[TempLikvidusNameEnum.V]!!.value,
+                            al = percentMetalMap[TempLikvidusNameEnum.Al]!!.value,
+                            ni = percentMetalMap[TempLikvidusNameEnum.Ni]!!.value,
+                            mn = percentMetalMap[TempLikvidusNameEnum.Mn]!!.value,
+                            cu = percentMetalMap[TempLikvidusNameEnum.Cu]!!.value,
+                            si = percentMetalMap[TempLikvidusNameEnum.Si]!!.value,
+                            ti = percentMetalMap[TempLikvidusNameEnum.Ti]!!.value,
+                            s = percentMetalMap[TempLikvidusNameEnum.S]!!.value,
+                            p = percentMetalMap[TempLikvidusNameEnum.P]!!.value,
+                            c = percentMetalMap[TempLikvidusNameEnum.C]!!.value,
+                        ),
+                        name = nameInput.text.toString(),
+                        description = descriptionInput.text.toString()
+                    )
+                    if (vm.send(saveCalcEvent))
+                    {
                         Toast.makeText(context, resources.getString(R.string.saved), Toast.LENGTH_SHORT).show()
                     }
                     else{
@@ -116,17 +170,9 @@ class TempLikvidusFasonCalcFragment  : Fragment(), PercentMetalAdapter.Listener,
                     }
                 }
             }
-
-            descriptionBuilder.setNegativeButton(
-                R.string.cancel
-            ) { _, _ -> }
-            descriptionBuilder.show()
-        }
-
-        nameBuilder.setNegativeButton(
-            R.string.cancel
-        ) { _, _ -> }
-        nameBuilder.show()
+            .setNegativeButton(R.string.cancel) { _, _ -> }
+            .create()
+            .show()
     }
 
 }

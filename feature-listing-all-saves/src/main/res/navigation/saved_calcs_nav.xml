@@ -14,7 +14,23 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_savedCalcsFragment_to_fason_saved_nav"
+            app:destination="@id/fason_saved_nav"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_savedCalcsFragment_to_ingot_saved_nav"
+            app:destination="@id/ingot_saved_nav"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <include app:graph="@navigation/cargo_weight_nav_saved" />
+    <include app:graph="@navigation/fason_saved_calc_nav" />
+    <include app:graph="@navigation/ingot_saved_calc_nav" />
 </navigation>

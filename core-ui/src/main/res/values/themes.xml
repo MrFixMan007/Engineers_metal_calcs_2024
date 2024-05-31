@@ -9,6 +9,7 @@
         <item name="android:textColor">@color/secondaryElementsColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="colorControlNormal">@color/primaryTextColor</item>
 
 <!--        Цвет верхнего системного статус бара-->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>

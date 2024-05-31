@@ -27,7 +27,6 @@ class CargoWeightSavedViewModel(
     private val stringResourceMapper: StringResourceMapper,
     private val countRoundWith: Int,
     private val countRoundWithout: Int,
-    var name: String? = null
 ) : ViewModel() {
 
     private fun calcWeightWithout(){
@@ -54,7 +53,6 @@ class CargoWeightSavedViewModel(
     }
 
     private fun setSavedValues(param: CalcSave){
-        name = param.name
         val container = (param.container as CargoWeightContainer)
         calcUnitMap[CargoWeightNameEnum.Vb]!!.value = container.vB.value
         calcUnitMap[CargoWeightNameEnum.Vb]!!.measuredIn = stringResourceMapper.getString(container.vB.measuredIn)

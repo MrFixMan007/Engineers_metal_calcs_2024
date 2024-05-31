@@ -2,7 +2,6 @@ package presentation.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -90,27 +89,25 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
         return true
     }
 
-    fun save() {
-        val nameBuilder = AlertDialog.Builder(binding.root.context)
-        nameBuilder.setTitle(R.string.name_item_window)
-        val nameInput = EditText(binding.root.context)
-        nameInput.inputType = InputType.TYPE_CLASS_TEXT
-        nameBuilder.setView(nameInput)
+    private fun save() {
+        val builder = AlertDialog.Builder(context)
 
-        nameBuilder.setPositiveButton(
-            R.string.ready
-        ) { _, _ ->
-            val descriptionBuilder = AlertDialog.Builder(binding.root.context)
-            descriptionBuilder.setTitle(R.string.description_item_window)
-            val descriptionInput = EditText(binding.root.context)
-            descriptionInput.inputType = InputType.TYPE_CLASS_TEXT
-            descriptionBuilder.setView(descriptionInput)
+        val customLayout: View = layoutInflater.inflate(R.layout.custom_alert_dialog, null)
+        builder.setView(customLayout)
 
-            descriptionBuilder.setPositiveButton(
-                R.string.ready
-            ) { _, _ ->
+        val nameInput = customLayout.findViewById<EditText>(R.id.nameOfSave)
+        val descriptionInput = customLayout.findViewById<EditText>(R.id.descriptionOfSave)
+
+        builder
+            .setPositiveButton(R.string.ready)
+            { _, _ ->
                 CoroutineScope(Dispatchers.Main).launch {
-                    if (vm.send(SaveCalcEvent(nameInput.text.toString(), descriptionInput.text.toString()))){
+                    val saveCalcEvent = SaveCalcEvent(
+                        name = nameInput.text.toString(),
+                        description = descriptionInput.text.toString()
+                    )
+                    if (vm.send(saveCalcEvent))
+                    {
                         Toast.makeText(context, resources.getString(R.string.saved), Toast.LENGTH_SHORT).show()
                     }
                     else{
@@ -118,24 +115,15 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
                     }
                 }
             }
-
-            descriptionBuilder.setNegativeButton(
-                R.string.cancel
-            ) { _, _ -> }
-            descriptionBuilder.show()
-        }
-
-        nameBuilder.setNegativeButton(
-            R.string.cancel
-        ) { _, _ -> }
-        nameBuilder.show()
+            .setNegativeButton(R.string.cancel) { _, _ -> }
+            .create()
+            .show()
     }
 
     private fun init(){
         val mapper : StringResourceMapper = get()
         mapper.setValues(get(named("cargoWeight")))
 
-        // TODO: можно перетащить в объявление
         adapter1 = LongCalcAdapter(listener = this@CargoWeightFragment,
             stringResourceMapper = mapper, recyclerViewId = rcViewId1)
         adapter2 = LongCalcAdapter(listener = this@CargoWeightFragment,

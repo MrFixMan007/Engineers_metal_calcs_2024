@@ -16,9 +16,5 @@ enum class TempLikvidusNameEnum {
     P,
     C,
 
-    ResTemp,
-    ResLowerTemp,
-    ResUpperTemp,
-    ResLowerInFurnaceTemp,
-    ResUpperInFurnaceTemp,
+    ResTemp
 }

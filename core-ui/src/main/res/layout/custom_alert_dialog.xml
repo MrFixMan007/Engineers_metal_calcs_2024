@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/name_item_window"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/textPaddingT1"
+        android:layout_marginTop="@dimen/textPaddingT1"
+        />
+
+    <EditText
+        android:id="@+id/nameOfSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/text"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/textPaddingT1"
+        android:background="@color/transparent"
+        android:layout_marginStart="@dimen/textPaddingT1"
+        android:layout_marginEnd="@dimen/textPaddingT1"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/specialActionElementsColor"
+        android:layout_marginStart="@dimen/textPaddingT1"
+        android:layout_marginEnd="@dimen/textPaddingT1"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/description_item_window"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/textPaddingT1"
+        android:layout_marginTop="@dimen/textPaddingT1"
+        />
+
+    <EditText
+        android:id="@+id/descriptionOfSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/text"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/textPaddingT1"
+        android:background="@color/transparent"
+        android:layout_marginStart="@dimen/textPaddingT1"
+        android:layout_marginEnd="@dimen/textPaddingT1"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/specialActionElementsColor"
+        android:layout_marginStart="@dimen/textPaddingT1"
+        android:layout_marginEnd="@dimen/textPaddingT1"
+        />
+
+</LinearLayout>

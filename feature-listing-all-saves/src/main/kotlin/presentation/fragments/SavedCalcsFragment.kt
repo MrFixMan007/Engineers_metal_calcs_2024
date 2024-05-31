@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import data.model.CalcSave
+import data.model.TypeEnum
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,9 +36,7 @@ class SavedCalcsFragment : Fragment(), SaveAdapter.Listener {
         super.onCreate(savedInstanceState)
         binding = FragmentSavedCalcsBinding.inflate(layoutInflater)
 
-        CoroutineScope(Dispatchers.Main).launch {
-            init()
-        }
+        init()
     }
 
     override fun onCreateView(
@@ -44,63 +44,64 @@ class SavedCalcsFragment : Fragment(), SaveAdapter.Listener {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        CoroutineScope(Dispatchers.Main).launch {
+            update()
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         controller = findNavController()
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        if (GlobalParameter.getSavesChanged()) {
-            CoroutineScope(Dispatchers.IO).launch {
-                viewmodel.update()
+    private suspend fun update(){
+        viewmodel.update()
+        if (calcSaves.size != viewmodel.allCalcSaves.size){
+            for (i in calcSaves.size..<viewmodel.allCalcSaves.size) {
+                calcSaves.add(viewmodel.allCalcSaves[i])
+                saveItems.add(
+                    SaveItem(
+                        name = viewmodel.allCalcSaves[i].name,
+                        description = viewmodel.allCalcSaves[i].description,
+                        result = viewmodel.allCalcSaves[i].result.replace(" ", "\n"),
+                        date = viewmodel.allCalcSaves[i].date,
+                        type = viewmodel.allCalcSaves[i].type
+                ))
+                adapter.add(saveItems.last())
             }
         }
     }
 
-    private suspend fun init(){
-        if (GlobalParameter.getSavesChanged()) {
-            viewmodel.update()
-        }
-        calcSaves.addAll(viewmodel.allCalcSaves)
-
-        calcSaves.forEach {
-            saveItems.add(
-                SaveItem(
-                name = it.name,
-                description = it.description,
-                result = it.result.replace(" ", "\n"),
-                date = it.date
-        )
-        ) }
-
+    private fun init(){
         binding.apply {
             rcView.layoutManager = LinearLayoutManager(context)
             rcView.adapter = adapter
-            adapter.addAll(saveItems)
         }
     }
 
     override fun onClick(item: SaveItem) {
         GlobalParameter.setCalcSave(calcSaves[saveItems.indexOf(item)])
-        controller.navigate(R.id.action_savedCalcsFragment_to_cargo_weight_nav)
+        when (item.type.typeEnum){
+            TypeEnum.WeightOfCargo -> controller.navigate(R.id.action_savedCalcsFragment_to_cargo_weight_nav, bundleOf("title" to item.name))
+            TypeEnum.TemperatureFason -> controller.navigate(R.id.action_savedCalcsFragment_to_fason_saved_nav, bundleOf("title" to item.name))
+            TypeEnum.TemperatureIngot -> controller.navigate(R.id.action_savedCalcsFragment_to_ingot_saved_nav, bundleOf("title" to item.name))
+        }
+
     }
 
     override fun deleteSave(item: SaveItem) {
         adapter.deleteItem(item)
         CoroutineScope(Dispatchers.Main).launch {
-            //TODO: удаление через репу
+            val saveForRemove = calcSaves.find { it.name == item.name && it.date == item.date }
+            calcSaves.remove(saveForRemove)
+            saveItems.remove(item)
         }
     }
 
     override fun itemWasChanged(item: SaveItem) {
         adapter.itemWasChanged(item)
-//        CoroutineScope(Dispatchers.Main).launch {
-//            // я хз чо это. мб имя или описание было изменено и это упоминание
-//        }
     }
 
 }

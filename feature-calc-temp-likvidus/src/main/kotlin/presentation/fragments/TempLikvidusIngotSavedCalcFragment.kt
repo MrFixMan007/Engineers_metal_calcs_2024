@@ -20,28 +20,26 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import metalcalcs.core_ui.R
-import metalcalcs.feature_calc_temp_likvidus.databinding.FragmentTempLikvidusIngotCalcBinding
-import org.koin.android.ext.android.inject
+import metalcalcs.feature_calc_temp_likvidus.databinding.FragmentTempLikvidusIngotSavedCalcBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.qualifier.named
 import presentation.adapter.PercentMetalAdapter
 import presentation.model.PercentMetalModel
 import presentation.viewmodel.CalcIngotEvent
 import presentation.viewmodel.SaveCalcTempLikvidIngotEvent
-import presentation.viewmodel.TempLikvidusIngotViewModel
+import presentation.viewmodel.TempLikvidusIngotSavedViewModel
 
-class TempLikvidusIngotCalcFragment : Fragment(), PercentMetalAdapter.Listener, MenuProvider {
+class TempLikvidusIngotSavedCalcFragment : Fragment(), PercentMetalAdapter.Listener, MenuProvider {
 
-    private lateinit var binding: FragmentTempLikvidusIngotCalcBinding
+    private lateinit var binding: FragmentTempLikvidusIngotSavedCalcBinding
 
-    private val vm : TempLikvidusIngotViewModel by viewModel()
-    private val percentMetalMap: MutableMap<TempLikvidusNameEnum, PercentMetalModel> by inject(named("percentMetalsIngot"))
+    private val vm : TempLikvidusIngotSavedViewModel by viewModel()
+    private lateinit var percentMetalMap: MutableMap<TempLikvidusNameEnum, PercentMetalModel>
 
     private lateinit var adapter : PercentMetalAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentTempLikvidusIngotCalcBinding.inflate(layoutInflater)
+        binding = FragmentTempLikvidusIngotSavedCalcBinding.inflate(layoutInflater)
 
         init()
     }
@@ -71,28 +69,32 @@ class TempLikvidusIngotCalcFragment : Fragment(), PercentMetalAdapter.Listener, 
         }
         else
         {
-            CoroutineScope(Dispatchers.Main).launch {
-                vm.send(
-                    CalcIngotEvent(
-                        TemperatureIngotInputParam(
-                            w = percentMetalMap[TempLikvidusNameEnum.W]!!.value,
-                            cr = percentMetalMap[TempLikvidusNameEnum.Cr]!!.value,
-                            co = percentMetalMap[TempLikvidusNameEnum.Co]!!.value,
-                            mo = percentMetalMap[TempLikvidusNameEnum.Mo]!!.value,
-                            v = percentMetalMap[TempLikvidusNameEnum.V]!!.value,
-                            al = percentMetalMap[TempLikvidusNameEnum.Al]!!.value,
-                            ni = percentMetalMap[TempLikvidusNameEnum.Ni]!!.value,
-                            mn = percentMetalMap[TempLikvidusNameEnum.Mn]!!.value,
-                            cu = percentMetalMap[TempLikvidusNameEnum.Cu]!!.value,
-                            si = percentMetalMap[TempLikvidusNameEnum.Si]!!.value,
-                            ti = percentMetalMap[TempLikvidusNameEnum.Ti]!!.value,
-                            s = percentMetalMap[TempLikvidusNameEnum.S]!!.value,
-                            p = percentMetalMap[TempLikvidusNameEnum.P]!!.value,
-                            c = percentMetalMap[TempLikvidusNameEnum.C]!!.value,
-                        )
+            send()
+        }
+    }
+
+    private fun send(){
+        CoroutineScope(Dispatchers.Main).launch {
+            vm.send(
+                CalcIngotEvent(
+                    TemperatureIngotInputParam(
+                        w = percentMetalMap[TempLikvidusNameEnum.W]!!.value,
+                        cr = percentMetalMap[TempLikvidusNameEnum.Cr]!!.value,
+                        co = percentMetalMap[TempLikvidusNameEnum.Co]!!.value,
+                        mo = percentMetalMap[TempLikvidusNameEnum.Mo]!!.value,
+                        v = percentMetalMap[TempLikvidusNameEnum.V]!!.value,
+                        al = percentMetalMap[TempLikvidusNameEnum.Al]!!.value,
+                        ni = percentMetalMap[TempLikvidusNameEnum.Ni]!!.value,
+                        mn = percentMetalMap[TempLikvidusNameEnum.Mn]!!.value,
+                        cu = percentMetalMap[TempLikvidusNameEnum.Cu]!!.value,
+                        si = percentMetalMap[TempLikvidusNameEnum.Si]!!.value,
+                        ti = percentMetalMap[TempLikvidusNameEnum.Ti]!!.value,
+                        s = percentMetalMap[TempLikvidusNameEnum.S]!!.value,
+                        p = percentMetalMap[TempLikvidusNameEnum.P]!!.value,
+                        c = percentMetalMap[TempLikvidusNameEnum.C]!!.value,
                     )
                 )
-            }
+            )
         }
     }
 
@@ -109,22 +111,25 @@ class TempLikvidusIngotCalcFragment : Fragment(), PercentMetalAdapter.Listener, 
     }
 
     private fun init(){
+        percentMetalMap = vm.getSavedValuesMap()
         adapter = PercentMetalAdapter(this)
         val listPercentMetal = mutableListOf<PercentMetalModel>()
         percentMetalMap.forEach { (_, u) ->  listPercentMetal.add(u)}
 
         binding.apply {
+            title.text = arguments?.getString("title")
             rcViewTempLikvidus.adapter = adapter
             rcViewTempLikvidus.layoutManager = GridLayoutManager(context, 3)
             adapter.addAll(listPercentMetal)
 
-            vm.resultLive.observe(this@TempLikvidusIngotCalcFragment) { state ->
+            vm.resultLive.observe(this@TempLikvidusIngotSavedCalcFragment) { state ->
                 res.text = "${state.res}"
                 resLower.text = "${state.resLower}"
                 resUpper.text = "${state.resUpper}"
                 resLowerInFurnace.text = "${state.resLowerInFurnace}"
                 resUpperInFurnace.text = "${state.resUpperInFurnace}"
             }
+            send()
         }
     }
 

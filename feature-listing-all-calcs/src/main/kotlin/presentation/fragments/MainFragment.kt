@@ -1,7 +1,6 @@
 package presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -45,7 +44,7 @@ class MainFragment : Fragment(), MenuProvider {
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.toolbar_main_menu, menu)
+        menuInflater.inflate(R.menu.toolbar_empty_menu, menu)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

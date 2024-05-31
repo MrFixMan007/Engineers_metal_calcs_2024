@@ -25,7 +25,7 @@
                 />
             <Button
                 style="@style/CustomBigMenuButton"
-                android:id="@+id/likvid_calc_main_menu_button2"
+                android:id="@+id/likvid_calc_menu_button2"
                 android:layout_marginRight="@dimen/marginTopLeft"
                 android:text="@string/likvid_calc_main_menu_button2"
                 />

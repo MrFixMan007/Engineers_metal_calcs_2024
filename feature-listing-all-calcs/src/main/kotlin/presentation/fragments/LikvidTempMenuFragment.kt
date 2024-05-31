@@ -38,11 +38,14 @@ class LikvidTempMenuFragment : Fragment(), MenuProvider {
             likvidCalcMenuButton1.setOnClickListener {
                 controller.navigate(R.id.action_likvidTempMenuFragment_to_fason_nav)
             }
+            likvidCalcMenuButton2.setOnClickListener {
+                controller.navigate(R.id.action_likvidTempMenuFragment_to_ingot_nav)
+            }
         }
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(metalcalcs.core_ui.R.menu.toolbar_main_menu, menu)
+        menuInflater.inflate(metalcalcs.core_ui.R.menu.toolbar_empty_menu, menu)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -50,6 +53,7 @@ class LikvidTempMenuFragment : Fragment(), MenuProvider {
             metalcalcs.core_ui.R.id.turnOff -> {
                 activity?.finish()
             }
+            android.R.id.home -> findNavController().popBackStack()
         }
         return true
     }

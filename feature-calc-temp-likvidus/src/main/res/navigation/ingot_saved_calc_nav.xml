@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ingot_saved_nav"
+    app:startDestination="@id/tempLikvidusIngotSavedCalcFragment">
+
+    <fragment
+        android:id="@+id/tempLikvidusIngotSavedCalcFragment"
+        android:name="presentation.fragments.TempLikvidusIngotSavedCalcFragment"
+        android:label="@string/likvid_calc_main_menu_button2" />
+</navigation>

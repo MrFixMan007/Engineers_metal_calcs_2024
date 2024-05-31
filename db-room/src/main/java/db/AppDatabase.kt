@@ -11,7 +11,10 @@ import data.model.CalcSave
 import data.model.SimpleCalcInfo
 import data.model.TypeEnum
 import data.model.calcNamesEnum.CargoWeightNameEnum
+import data.model.calcNamesEnum.TempLikvidusNameEnum
 import data.model.container.CargoWeightContainer
+import data.model.container.TempLikvidusFasonContainer
+import data.model.container.TempLikvidusIngotContainer
 import db.dao.CharacterDao
 import db.dao.PossibleValueDao
 import db.dao.SaveDao
@@ -72,36 +75,162 @@ abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
 
         saves.forEach { it ->
             val type = typeDao.getById(it.typeIdFk)
-
             val characters = characterDao.getAllByTypeIdFk(type.id!!)
-            val vB = characters.find { character -> character.name == CargoWeightNameEnum.Vb.name }
-            val v1C = characters.find { character -> character.name == CargoWeightNameEnum.V1c.name }
-            val v2C = characters.find { character -> character.name == CargoWeightNameEnum.V2c.name }
-            val mB = characters.find { character -> character.name == CargoWeightNameEnum.Mb.name }
-            val mC = characters.find { character -> character.name == CargoWeightNameEnum.Mc.name }
 
-            val vBValue = valueDao.getByCharacterIdFkAndSaveIdFk(vB!!.id!!, it.id!!)
-            val v1CValue = valueDao.getByCharacterIdFkAndSaveIdFk(v1C!!.id!!, it.id!!)
-            val v2CValue = valueDao.getByCharacterIdFkAndSaveIdFk(v2C!!.id!!, it.id!!)
-            val mBValue = valueDao.getByCharacterIdFkAndSaveIdFk(mB!!.id!!, it.id!!)
-            val mCValue = valueDao.getByCharacterIdFkAndSaveIdFk(mC!!.id!!, it.id!!)
-            if (type.name == TypeEnum.WeightOfCargo.name){
-                val container = CargoWeightContainer(
-                    vB = VolumeUnit(CalcTypeMapper.getVolume(vBValue.measuredIn), vBValue.value),
-                    v1C = VolumeUnit(CalcTypeMapper.getVolume(v1CValue.measuredIn), v1CValue.value),
-                    v2C = VolumeUnit(CalcTypeMapper.getVolume(v2CValue.measuredIn), v2CValue.value),
-                    mB = WeightUnit(CalcTypeMapper.getWeight(mBValue.measuredIn), mBValue.value),
-                    mC = WeightUnit(CalcTypeMapper.getWeight(mCValue.measuredIn), mCValue.value),
-                )
-                calcSaveList.add(
-                    CalcSave(
-                        type = CalcTypeMapper.toCalcType(type.name)!!,
-                        name = it.name,
-                        description = it.description,
-                        date = it.date,
-                        container = container
+            when (type.name){
+                TypeEnum.WeightOfCargo.name ->
+                {
+                    val vB = characters.find { character -> character.name == CargoWeightNameEnum.Vb.name }
+                    val v1C = characters.find { character -> character.name == CargoWeightNameEnum.V1c.name }
+                    val v2C = characters.find { character -> character.name == CargoWeightNameEnum.V2c.name }
+                    val mB = characters.find { character -> character.name == CargoWeightNameEnum.Mb.name }
+                    val mC = characters.find { character -> character.name == CargoWeightNameEnum.Mc.name }
+
+                    val vBValue = valueDao.getByCharacterIdFkAndSaveIdFk(vB!!.id!!, it.id!!)
+                    val v1CValue = valueDao.getByCharacterIdFkAndSaveIdFk(v1C!!.id!!, it.id!!)
+                    val v2CValue = valueDao.getByCharacterIdFkAndSaveIdFk(v2C!!.id!!, it.id!!)
+                    val mBValue = valueDao.getByCharacterIdFkAndSaveIdFk(mB!!.id!!, it.id!!)
+                    val mCValue = valueDao.getByCharacterIdFkAndSaveIdFk(mC!!.id!!, it.id!!)
+
+                    val container = CargoWeightContainer(
+                        vB = VolumeUnit(CalcTypeMapper.getVolume(vBValue.measuredIn), vBValue.value),
+                        v1C = VolumeUnit(CalcTypeMapper.getVolume(v1CValue.measuredIn), v1CValue.value),
+                        v2C = VolumeUnit(CalcTypeMapper.getVolume(v2CValue.measuredIn), v2CValue.value),
+                        mB = WeightUnit(CalcTypeMapper.getWeight(mBValue.measuredIn), mBValue.value),
+                        mC = WeightUnit(CalcTypeMapper.getWeight(mCValue.measuredIn), mCValue.value),
                     )
-                )
+                    calcSaveList.add(
+                        CalcSave(
+                            type = CalcTypeMapper.toCalcType(type.name)!!,
+                            name = it.name,
+                            description = it.description,
+                            date = it.date,
+                            container = container
+                        )
+                    )
+                }
+                TypeEnum.TemperatureFason.name ->
+                {
+                    val w = characters.find { character -> character.name == TempLikvidusNameEnum.W.name }!!
+                    val cr = characters.find { character -> character.name == TempLikvidusNameEnum.Cr.name }!!
+                    val co = characters.find { character -> character.name == TempLikvidusNameEnum.Co.name }!!
+                    val mo = characters.find { character -> character.name == TempLikvidusNameEnum.Mo.name }!!
+                    val v = characters.find { character -> character.name == TempLikvidusNameEnum.V.name }!!
+                    val al = characters.find { character -> character.name == TempLikvidusNameEnum.Al.name }!!
+                    val ni = characters.find { character -> character.name == TempLikvidusNameEnum.Ni.name }!!
+                    val mn = characters.find { character -> character.name == TempLikvidusNameEnum.Mn.name }!!
+                    val cu = characters.find { character -> character.name == TempLikvidusNameEnum.Cu.name }!!
+                    val si = characters.find { character -> character.name == TempLikvidusNameEnum.Si.name }!!
+                    val ti = characters.find { character -> character.name == TempLikvidusNameEnum.Ti.name }!!
+                    val s = characters.find { character -> character.name == TempLikvidusNameEnum.S.name }!!
+                    val p = characters.find { character -> character.name == TempLikvidusNameEnum.P.name }!!
+                    val c = characters.find { character -> character.name == TempLikvidusNameEnum.C.name }!!
+                    val resTemp = characters.find { character -> character.name == TempLikvidusNameEnum.ResTemp.name }!!
+
+                    val wValue = valueDao.getByCharacterIdFkAndSaveIdFk(w.id!!, it.id!!)
+                    val crValue = valueDao.getByCharacterIdFkAndSaveIdFk(cr.id!!, it.id!!)
+                    val coValue = valueDao.getByCharacterIdFkAndSaveIdFk(co.id!!, it.id!!)
+                    val moValue = valueDao.getByCharacterIdFkAndSaveIdFk(mo.id!!, it.id!!)
+                    val vValue = valueDao.getByCharacterIdFkAndSaveIdFk(v.id!!, it.id!!)
+                    val alValue = valueDao.getByCharacterIdFkAndSaveIdFk(al.id!!, it.id!!)
+                    val niValue = valueDao.getByCharacterIdFkAndSaveIdFk(ni.id!!, it.id!!)
+                    val mnValue = valueDao.getByCharacterIdFkAndSaveIdFk(mn.id!!, it.id!!)
+                    val cuValue = valueDao.getByCharacterIdFkAndSaveIdFk(cu.id!!, it.id!!)
+                    val siValue = valueDao.getByCharacterIdFkAndSaveIdFk(si.id!!, it.id!!)
+                    val tiValue = valueDao.getByCharacterIdFkAndSaveIdFk(ti.id!!, it.id!!)
+                    val sValue = valueDao.getByCharacterIdFkAndSaveIdFk(s.id!!, it.id!!)
+                    val pValue = valueDao.getByCharacterIdFkAndSaveIdFk(p.id!!, it.id!!)
+                    val cValue = valueDao.getByCharacterIdFkAndSaveIdFk(c.id!!, it.id!!)
+                    val resTempValue = valueDao.getByCharacterIdFkAndSaveIdFk(resTemp.id!!, it.id!!)
+
+                    val container = TempLikvidusFasonContainer(
+                        w = wValue.value,
+                        cr = crValue.value,
+                        co = coValue.value,
+                        mo = moValue.value,
+                        v = vValue.value,
+                        al = alValue.value,
+                        ni = niValue.value,
+                        mn = mnValue.value,
+                        cu = cuValue.value,
+                        si = siValue.value,
+                        ti = tiValue.value,
+                        s = sValue.value,
+                        p = pValue.value,
+                        c = cValue.value,
+                        res = resTempValue.value
+                    )
+                    calcSaveList.add(
+                        CalcSave(
+                            type = CalcTypeMapper.toCalcType(type.name)!!,
+                            name = it.name,
+                            description = it.description,
+                            date = it.date,
+                            container = container
+                        )
+                    )
+                }
+                TypeEnum.TemperatureIngot.name ->
+                {
+                    val w = characters.find { character -> character.name == TempLikvidusNameEnum.W.name }!!
+                    val cr = characters.find { character -> character.name == TempLikvidusNameEnum.Cr.name }!!
+                    val co = characters.find { character -> character.name == TempLikvidusNameEnum.Co.name }!!
+                    val mo = characters.find { character -> character.name == TempLikvidusNameEnum.Mo.name }!!
+                    val v = characters.find { character -> character.name == TempLikvidusNameEnum.V.name }!!
+                    val al = characters.find { character -> character.name == TempLikvidusNameEnum.Al.name }!!
+                    val ni = characters.find { character -> character.name == TempLikvidusNameEnum.Ni.name }!!
+                    val mn = characters.find { character -> character.name == TempLikvidusNameEnum.Mn.name }!!
+                    val cu = characters.find { character -> character.name == TempLikvidusNameEnum.Cu.name }!!
+                    val si = characters.find { character -> character.name == TempLikvidusNameEnum.Si.name }!!
+                    val ti = characters.find { character -> character.name == TempLikvidusNameEnum.Ti.name }!!
+                    val s = characters.find { character -> character.name == TempLikvidusNameEnum.S.name }!!
+                    val p = characters.find { character -> character.name == TempLikvidusNameEnum.P.name }!!
+                    val c = characters.find { character -> character.name == TempLikvidusNameEnum.C.name }!!
+                    val resTemp = characters.find { character -> character.name == TempLikvidusNameEnum.ResTemp.name }!!
+
+                    val wValue = valueDao.getByCharacterIdFkAndSaveIdFk(w.id!!, it.id!!)
+                    val crValue = valueDao.getByCharacterIdFkAndSaveIdFk(cr.id!!, it.id!!)
+                    val coValue = valueDao.getByCharacterIdFkAndSaveIdFk(co.id!!, it.id!!)
+                    val moValue = valueDao.getByCharacterIdFkAndSaveIdFk(mo.id!!, it.id!!)
+                    val vValue = valueDao.getByCharacterIdFkAndSaveIdFk(v.id!!, it.id!!)
+                    val alValue = valueDao.getByCharacterIdFkAndSaveIdFk(al.id!!, it.id!!)
+                    val niValue = valueDao.getByCharacterIdFkAndSaveIdFk(ni.id!!, it.id!!)
+                    val mnValue = valueDao.getByCharacterIdFkAndSaveIdFk(mn.id!!, it.id!!)
+                    val cuValue = valueDao.getByCharacterIdFkAndSaveIdFk(cu.id!!, it.id!!)
+                    val siValue = valueDao.getByCharacterIdFkAndSaveIdFk(si.id!!, it.id!!)
+                    val tiValue = valueDao.getByCharacterIdFkAndSaveIdFk(ti.id!!, it.id!!)
+                    val sValue = valueDao.getByCharacterIdFkAndSaveIdFk(s.id!!, it.id!!)
+                    val pValue = valueDao.getByCharacterIdFkAndSaveIdFk(p.id!!, it.id!!)
+                    val cValue = valueDao.getByCharacterIdFkAndSaveIdFk(c.id!!, it.id!!)
+                    val resTempValue = valueDao.getByCharacterIdFkAndSaveIdFk(resTemp.id!!, it.id!!)
+
+                    val container = TempLikvidusIngotContainer(
+                        w = wValue.value,
+                        cr = crValue.value,
+                        co = coValue.value,
+                        mo = moValue.value,
+                        v = vValue.value,
+                        al = alValue.value,
+                        ni = niValue.value,
+                        mn = mnValue.value,
+                        cu = cuValue.value,
+                        si = siValue.value,
+                        ti = tiValue.value,
+                        s = sValue.value,
+                        p = pValue.value,
+                        c = cValue.value,
+                        res = resTempValue.value
+                    )
+                    calcSaveList.add(
+                        CalcSave(
+                            type = CalcTypeMapper.toCalcType(type.name)!!,
+                            name = it.name,
+                            description = it.description,
+                            date = it.date,
+                            container = container
+                        )
+                    )
+                }
             }
         }
 
@@ -133,7 +262,8 @@ abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
 
     override suspend fun setCalcSave(calcSave: CalcSave): Boolean = withContext(Dispatchers.IO){
         when(calcSave.container){
-            is CargoWeightContainer -> {
+            is CargoWeightContainer ->
+            {
                 val container = (calcSave.container as CargoWeightContainer)
                 val characterDao = characterDao()!!
                 val characters = characterDao.getAllByTypeIdFk(typeDao()!!.getByName(calcSave.type.typeEnum.name).id!!)
@@ -185,6 +315,100 @@ abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
                         ),
                     )
                 )
+                GlobalParameter.setSavesChanged()
+                return@withContext true
+            }
+
+            is TempLikvidusFasonContainer ->
+            {
+                val container = (calcSave.container as TempLikvidusFasonContainer)
+                val characterDao = characterDao()!!
+                val characters = characterDao.getAllByTypeIdFk(typeDao()!!.getByName(calcSave.type.typeEnum.name).id!!)
+
+                val saveId = saveDao()!!.insert(Save(
+                    name = calcSave.name,
+                    description = calcSave.description,
+                    typeIdFk = typeDao()!!.getByName(calcSave.type.typeEnum.name).id!!,
+                    result = container.getResult()
+                ))
+
+                val valueDao = valueDao()!!
+
+                for (tempLikvidusNameEnum in TempLikvidusNameEnum.values()){
+                    val character = characters.find { it.name == tempLikvidusNameEnum.name }!!
+
+                    var value = 0f
+                    when (character.name){
+                        TempLikvidusNameEnum.W.name -> value = container.w
+                        TempLikvidusNameEnum.Cr.name -> value = container.cr
+                        TempLikvidusNameEnum.Co.name -> value = container.co
+                        TempLikvidusNameEnum.Mo.name -> value = container.mo
+                        TempLikvidusNameEnum.V.name -> value = container.v
+                        TempLikvidusNameEnum.Al.name -> value = container.al
+                        TempLikvidusNameEnum.Ni.name -> value = container.ni
+                        TempLikvidusNameEnum.Mn.name -> value = container.mn
+                        TempLikvidusNameEnum.Cu.name -> value = container.cu
+                        TempLikvidusNameEnum.Si.name -> value = container.si
+                        TempLikvidusNameEnum.Ti.name -> value = container.ti
+                        TempLikvidusNameEnum.S.name -> value = container.s
+                        TempLikvidusNameEnum.P.name -> value = container.p
+                        TempLikvidusNameEnum.C.name -> value = container.c
+                        TempLikvidusNameEnum.ResTemp.name -> value = container.res
+                    }
+
+                    valueDao.insert(Value(
+                        characterIdFk = character.id!!,
+                        saveIdFk = saveId,
+                        value = value
+                    ))
+                }
+                GlobalParameter.setSavesChanged()
+                return@withContext true
+            }
+
+            is TempLikvidusIngotContainer ->
+            {
+                val container = (calcSave.container as TempLikvidusIngotContainer)
+                val characterDao = characterDao()!!
+                val characters = characterDao.getAllByTypeIdFk(typeDao()!!.getByName(calcSave.type.typeEnum.name).id!!)
+
+                val saveId = saveDao()!!.insert(Save(
+                    name = calcSave.name,
+                    description = calcSave.description,
+                    typeIdFk = typeDao()!!.getByName(calcSave.type.typeEnum.name).id!!,
+                    result = container.getResult()
+                ))
+
+                val valueDao = valueDao()!!
+
+                for (tempLikvidusNameEnum in TempLikvidusNameEnum.values()){
+                    val character = characters.find { it.name == tempLikvidusNameEnum.name }!!
+
+                    var value = 0f
+                    when (character.name){
+                        TempLikvidusNameEnum.W.name -> value = container.w
+                        TempLikvidusNameEnum.Cr.name -> value = container.cr
+                        TempLikvidusNameEnum.Co.name -> value = container.co
+                        TempLikvidusNameEnum.Mo.name -> value = container.mo
+                        TempLikvidusNameEnum.V.name -> value = container.v
+                        TempLikvidusNameEnum.Al.name -> value = container.al
+                        TempLikvidusNameEnum.Ni.name -> value = container.ni
+                        TempLikvidusNameEnum.Mn.name -> value = container.mn
+                        TempLikvidusNameEnum.Cu.name -> value = container.cu
+                        TempLikvidusNameEnum.Si.name -> value = container.si
+                        TempLikvidusNameEnum.Ti.name -> value = container.ti
+                        TempLikvidusNameEnum.S.name -> value = container.s
+                        TempLikvidusNameEnum.P.name -> value = container.p
+                        TempLikvidusNameEnum.C.name -> value = container.c
+                        TempLikvidusNameEnum.ResTemp.name -> value = container.res
+                    }
+
+                    valueDao.insert(Value(
+                        characterIdFk = character.id!!,
+                        saveIdFk = saveId,
+                        value = value
+                    ))
+                }
                 GlobalParameter.setSavesChanged()
                 return@withContext true
             }
@@ -244,39 +468,81 @@ abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
     }
 
     private suspend fun setDefaultValues() = withContext(Dispatchers.IO){
+        val allTypes = typeDao()!!.all
+        if (!allTypes.any { it.name == TypeEnum.TemperatureFason.name })
+        {
+            //температура фасонного литья
+            val typeDao = typeDao()!!
+            val characterDao = characterDao()!!
+            val typeTempLikvidusFasonId = typeDao.insert(Type(name = TypeEnum.TemperatureFason.name))
 
-        if (typeDao()!!.all.isEmpty()) {
-            val typeDao = typeDao()
-            val typeId = typeDao!!.insert(Type(name = TypeEnum.WeightOfCargo.name))
+            for (tempLikvidusNameEnum in TempLikvidusNameEnum.values()){
+                val isInput = tempLikvidusNameEnum.name != TempLikvidusNameEnum.ResTemp.name
+
+                characterDao.insert(
+                    Character(
+                        typeIdFk = typeTempLikvidusFasonId,
+                        name = tempLikvidusNameEnum.name,
+                        isStrongMeasure = true,
+                        isInput = isInput
+                ))
+            }
+        }
+
+        if (!allTypes.any { it.name == TypeEnum.TemperatureIngot.name })
+        {
+            //температура литья слитков
+            val typeDao = typeDao()!!
+            val characterDao = characterDao()!!
+            val typeTempLikvidusIngotId = typeDao.insert(Type(name = TypeEnum.TemperatureIngot.name))
+
+            for (tempLikvidusNameEnum in TempLikvidusNameEnum.values()){
+                val isInput = tempLikvidusNameEnum.name != TempLikvidusNameEnum.ResTemp.name
+
+                characterDao.insert(
+                    Character(
+                        typeIdFk = typeTempLikvidusIngotId,
+                        name = tempLikvidusNameEnum.name,
+                        isStrongMeasure = true,
+                        isInput = isInput
+                    ))
+            }
+        }
+
+        if (!allTypes.any { it.name == TypeEnum.WeightOfCargo.name }) {
+            val typeDao = typeDao()!!
+            val typeWeightCargoId = typeDao.insert(Type(name = TypeEnum.WeightOfCargo.name))
+
             val characterDao = characterDao()
             characterDao!!.insertSome(
                 listOf(
+                    // вес груза
                     Character(
-                        typeIdFk = typeId,
+                        typeIdFk = typeWeightCargoId,
                         name = CargoWeightNameEnum.Vb.name,
                         isInput = true,
                         isStrongMeasure = true
                     ),
                     Character(
-                        typeIdFk = typeId,
+                        typeIdFk = typeWeightCargoId,
                         name = CargoWeightNameEnum.V1c.name,
                         isInput = true,
                         isStrongMeasure = true
                     ),
                     Character(
-                        typeIdFk = typeId,
+                        typeIdFk = typeWeightCargoId,
                         name = CargoWeightNameEnum.V2c.name,
                         isInput = true,
                         isStrongMeasure = true
                     ),
                     Character(
-                        typeIdFk = typeId,
+                        typeIdFk = typeWeightCargoId,
                         name = CargoWeightNameEnum.Mb.name,
                         isInput = false,
                         isStrongMeasure = false
                     ),
                     Character(
-                        typeIdFk = typeId,
+                        typeIdFk = typeWeightCargoId,
                         name = CargoWeightNameEnum.Mc.name,
                         isInput = false,
                         isStrongMeasure = false
@@ -284,131 +550,5 @@ abstract class AppDatabase : RoomDatabase(), CalcSaveRepository {
                 )
             )
         }
-
-//        val typeDao = typeDao()
-//        if (typeDao?.all?.size == 0) {
-//            val typesArray = context.resources.getStringArray(R.array.types)
-//            val types = ArrayList<Type>()
-//            for (item in typesArray) {
-//                types.add(Type(null, item))
-//            }
-//            typeDao.insertSome(types)
-//            val types1 = typeDao.all
-//            for (item in types1) {
-//                mapTypes[item.name] = item
-//            }
-//
-//            val characterDao = characterDao()
-//            val descArray = context.resources.getStringArray(R.array.weightCargoArrayWithout)
-//            val descArray1 = context.resources.getStringArray(R.array.weightCargoArrayWith)
-//            val characterList = listOf(
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_V),
-//                    0f,
-//                    10000f,
-//                    descArray[0],
-//                    context.getString(R.string.m3),
-//                    0f,
-//                    1f,
-//                    isStrongMeasure = true
-//                ),
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_K),
-//                    0f,
-//                    100f,
-//                    descArray[1],
-//                    "",
-//                    9.1f,
-//                    1f
-//                ),
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_Pb),
-//                    0f,
-//                    10000f,
-//                    descArray[2],
-//                    context.getString(R.string.t),
-//                    0f,
-//                    1f,
-//                    false
-//                ),
-//
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_V1),
-//                    0f,
-//                    10000f,
-//                    descArray1[0],
-//                    context.getString(R.string.m3),
-//                    0f,
-//                    1f,
-//                    isStrongMeasure = true
-//                ),
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_V2),
-//                    0f,
-//                    10000f,
-//                    descArray1[1],
-//                    context.getString(R.string.m3),
-//                    0f,
-//                    1f,
-//                    isStrongMeasure = true
-//                ),
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_Kp),
-//                    0f,
-//                    10000f,
-//                    descArray1[2],
-//                    "",
-//                    1.3f,
-//                    1f
-//                ),
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_k1),
-//                    0f,
-//                    10000f,
-//                    descArray1[3],
-//                    "",
-//                    7f,
-//                    1f
-//                ),
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_k2),
-//                    0f,
-//                    10000f,
-//                    descArray1[4],
-//                    "",
-//                    3f,
-//                    1f
-//                ),
-//                Character(
-//                    null,
-//                    mapTypes[context.getString(R.string.type01)]!!.id!!,
-//                    context.getString(R.string.Weight_Pc),
-//                    0f,
-//                    10000f,
-//                    descArray1[5],
-//                    context.getString(R.string.t),
-//                    0f,
-//                    1f,
-//                    false
-//                ),
-//            )
-//            characterDao?.insertSome(characterList)
-//        }
     }
 }
