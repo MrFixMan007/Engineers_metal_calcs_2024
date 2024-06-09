@@ -21,7 +21,6 @@
     </style>
 
     <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Other theme attributes -->
         <item name="colorControlNormal">@color/primaryTextColor</item>
     </style>
 
