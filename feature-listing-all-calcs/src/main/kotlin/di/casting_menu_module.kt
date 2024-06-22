@@ -4,7 +4,7 @@ import android.content.Context
 import metalcalcs.feature_listing_all_calcs.impl.R
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import presentation.model.Chapter
+import presentation.adapters.Chapter
 
 val casting_menu_module = module {
     single <List<Chapter>>(named("chapterList")) {

@@ -15,8 +15,8 @@ import metalcalcs.core_ui.R
 import metalcalcs.feature_listing_all_calcs.impl.databinding.FragmentCastingMenuBinding
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
-import presentation.adapter.ChapterAdapter
-import presentation.model.Chapter
+import presentation.adapters.ChapterAdapter
+import presentation.adapters.Chapter
 
 class CastingMenuFragment : Fragment(), ChapterAdapter.Listener, MenuProvider {
     private lateinit var binding: FragmentCastingMenuBinding

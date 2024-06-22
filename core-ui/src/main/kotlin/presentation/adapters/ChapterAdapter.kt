@@ -1,12 +1,11 @@
-package presentation.adapter
+package presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import metalcalcs.feature_listing_all_calcs.impl.R
-import metalcalcs.feature_listing_all_calcs.impl.databinding.ChapterListItemBinding
-import presentation.model.Chapter
+import metalcalcs.core_ui.R
+import metalcalcs.core_ui.databinding.ChapterListItemBinding
 
 class ChapterAdapter(private val listener: Listener): RecyclerView.Adapter<ChapterAdapter.ChapterHolder>() {
     private val chapterList = ArrayList<Chapter>()
@@ -42,3 +41,5 @@ class ChapterAdapter(private val listener: Listener): RecyclerView.Adapter<Chapt
         fun onClick(item: Chapter)
     }
 }
+
+data class Chapter(val title: String, val resIdWhereNavigate: Int)
