@@ -4,11 +4,14 @@ import com.example.feature_refguide.R
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import presentation.adapters.Chapter
 import presentation.adapters.ImageText
 
 val feature_refguide_module = module {
 
-    single <List<ImageText>>(named("gost_3_1125_88")) {
+    val gost1 = "gost_3_1125_88"
+
+    single <List<ImageText>>(named(gost1)) {
         val stringArray = androidContext().resources.getStringArray(R.array.gost_3_1125_88)
         listOf(
             ImageText(text = stringArray[0]),
@@ -80,6 +83,17 @@ val feature_refguide_module = module {
             ImageText(text = stringArray[64], imageId = R.drawable.gost_3_1125_88_drawing_32),
             ImageText(text = stringArray[65]),
             ImageText(imageId = R.drawable.gost_3_1125_88_example),
+        )
+    }
+
+    single <List<Chapter>>(named("chapters")) {
+        val resource = androidContext().resources
+        listOf(
+            Chapter(
+                title = resource.getString(R.string.gost_3_1125_88_name),
+                resIdWhereNavigate = R.id.action_guideMenuFragment_to_guideFragment,
+                nameOfType = gost1
+            ),
         )
     }
 }

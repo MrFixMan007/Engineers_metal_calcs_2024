@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/saved_calcs_nav"
     app:startDestination="@id/savedCalcsFragment">
 
     <fragment
         android:id="@+id/savedCalcsFragment"
         android:name="presentation.fragments.SavedCalcsFragment"
-        android:label="@string/stored_calcs" >
+        android:label="@string/stored_calcs"
+        tools:layout="@layout/fragment_saved_calcs">
         <action
             android:id="@+id/action_savedCalcsFragment_to_cargo_weight_nav"
             app:destination="@id/cargo_weight_nav"

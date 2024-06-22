@@ -82,6 +82,5 @@ dependencies {
 
     implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
     implementation(project(mapOf("path" to ":feature-calc-temp-likvidus")))
-    implementation(project(mapOf("path" to ":feature-refguide")))
     implementation(project(mapOf("path" to ":core-ui")))
 }

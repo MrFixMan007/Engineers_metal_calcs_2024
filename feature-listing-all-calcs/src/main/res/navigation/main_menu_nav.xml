@@ -24,13 +24,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_mainFragment_to_guide_nav"
-            app:destination="@id/guide_nav"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/likvidTempMenuFragment"
@@ -69,5 +62,4 @@
     <include app:graph="@navigation/cargo_weight_nav" />
     <include app:graph="@navigation/fason_calc_nav" />
     <include app:graph="@navigation/ingot_calc_nav" />
-    <include app:graph="@navigation/guide_nav" />
 </navigation>

@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/guide_nav"
-    app:startDestination="@id/guideFragment">
+    app:startDestination="@id/guideMenuFragment">
+
+    <fragment
+        android:id="@+id/guideMenuFragment"
+        android:name="fragments.GuideMenuFragment"
+        android:label="@string/guide_menu_label"
+        tools:layout="@layout/fragment_guide_menu">
+        <action
+            android:id="@+id/action_guideMenuFragment_to_guideFragment"
+            app:destination="@id/guideFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/guideFragment"
         android:name="fragments.GuideFragment"
-        android:label="GuideFragment" />
+        android:label="GuideFragment"
+        tools:layout="@layout/fragment_guide"/>
 </navigation>

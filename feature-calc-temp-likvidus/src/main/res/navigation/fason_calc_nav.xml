@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fason_nav"
     app:startDestination="@id/tempLikvidusFasonCalcFragment">
 
     <fragment
         android:id="@+id/tempLikvidusFasonCalcFragment"
         android:name="presentation.fragments.TempLikvidusFasonCalcFragment"
-        android:label="@string/likvid_calc_menu_button1" />
+        android:label="@string/likvid_calc_menu_button1"
+        tools:layout="@layout/fragment_temp_likvidus_fason_calc"/>
 </navigation>

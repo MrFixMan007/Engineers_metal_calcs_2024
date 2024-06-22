@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.feature_refguide.databinding.FragmentGuideBinding
-import org.koin.android.ext.android.inject
+import org.koin.android.ext.android.get
 import org.koin.core.qualifier.named
 import presentation.adapters.ImageText
 import presentation.adapters.ImageTextAdapter
@@ -18,7 +19,8 @@ class GuideFragment : Fragment() {
     private lateinit var binding: FragmentGuideBinding
 
     private lateinit var adapter : ImageTextAdapter
-    private val imageTextList: List<ImageText> by inject(named("gost_3_1125_88"))
+    private lateinit var imageTextList: List<ImageText>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,11 @@ class GuideFragment : Fragment() {
     }
 
     private fun init() {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = arguments?.getString("title")
+
         adapter = ImageTextAdapter()
+
+        imageTextList = get(named(arguments?.getString("nameOfGost")!!))
 
         binding.apply {
             rcView.adapter = adapter

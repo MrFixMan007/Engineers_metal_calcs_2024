@@ -6,5 +6,6 @@
 
     <include app:graph="@navigation/main_menu_nav" />
     <include app:graph="@navigation/saved_calcs_nav" />
+    <include app:graph="@navigation/guide_nav" />
 
 </navigation>

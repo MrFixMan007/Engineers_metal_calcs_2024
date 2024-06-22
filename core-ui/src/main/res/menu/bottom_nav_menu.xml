@@ -5,7 +5,7 @@
         android:title="@string/calcs"
         android:icon="@drawable/baseline_format_list_bulleted_24" />
     <item
-        android:id="@+id/guideNavigation"
+        android:id="@+id/guide_nav"
         android:title="@string/guide"
         android:icon="@drawable/baseline_book_24" />
     <item

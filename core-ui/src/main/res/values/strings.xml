@@ -22,7 +22,6 @@
     <string name="main_menu_button2">Литейный расчёт</string>
     <string name="main_menu_button3">Шихтовка</string>
     <string name="main_menu_button4">Контроль качества литейной продукции</string>
-    <string name="main_menu_button5">Справочник модельщика и формовщика</string>
 
     <string name="likvid_calc_menu_button1">Заливка фасонного литья</string>
     <string name="likvid_calc_main_menu_button2">Заливка слитков</string>

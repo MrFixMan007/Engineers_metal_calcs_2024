@@ -42,4 +42,4 @@ class ChapterAdapter(private val listener: Listener): RecyclerView.Adapter<Chapt
     }
 }
 
-data class Chapter(val title: String, val resIdWhereNavigate: Int)
+data class Chapter(val title: String, val resIdWhereNavigate: Int, val nameOfType: String? = null)
