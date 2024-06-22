@@ -9,6 +9,7 @@ import data.model.CalcSave
 import di.casting_menu_module
 import di.core_uiModule
 import di.feature_cargo_weight_module
+import di.feature_refguide_module
 import di.feature_saved_calcs_module
 import di.feature_temp_likvidus_module
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +34,9 @@ class App : Application() {
                 appModule, domainModule,
                 dataModule, feature_cargo_weight_module,
                 core_uiModule, casting_menu_module,
-                feature_saved_calcs_module, feature_temp_likvidus_module))
+                feature_saved_calcs_module, feature_temp_likvidus_module,
+                feature_refguide_module,
+                ))
             get<RoomDatabase>()
 
             CoroutineScope(Dispatchers.IO).launch {

@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/feature-calc-temp-likvidus" />
             <option value="$PROJECT_DIR$/feature-listing-all-calcs" />
             <option value="$PROJECT_DIR$/feature-listing-all-saves" />
+            <option value="$PROJECT_DIR$/feature-refguide" />
           </set>
         </option>
       </GradleProjectSettings>

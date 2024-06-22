@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { url = uri("https://www.jitpack.io") }
     }
 }
 
@@ -11,6 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://www.jitpack.io") }
     }
 }
 
@@ -26,3 +28,4 @@ include(":feature-calc-cargo-weight")
 include(":feature-listing-all-saves")
 include(":db-room")
 include(":feature-calc-temp-likvidus")
+include(":feature-refguide")

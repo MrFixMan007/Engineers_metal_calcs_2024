@@ -4,8 +4,7 @@ plugins {
 }
 
 android {
-    //TODO: namespace переименовать везде
-    namespace = "metalcalcs.feature_listing_all_calcs.impl"
+    namespace = "com.example.feature_refguide"
     compileSdk = 34
 
     defaultConfig {
@@ -13,10 +12,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildFeatures{
-        viewBinding = true
     }
 
     buildTypes {
@@ -27,6 +22,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+    buildFeatures{
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,23 +38,25 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
-    implementation("androidx.activity:activity-compose:1.9.0")
-
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    testImplementation ("androidx.test:core-ktx:1.5.0")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.7")
+
+    // Koin <
+    val koinVersion = "3.5.0"
+    val koinAndroidVersion = "3.5.0"
+    implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
+    implementation("io.insert-koin:koin-core")
+    implementation("io.insert-koin:koin-android:$koinAndroidVersion")
+    testImplementation("io.insert-koin:koin-test:$koinVersion")
+    // Koin >
+
+    // VM
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
+    //VM
 
     // navigation component implementation <
     val navVersion = "2.7.7"
@@ -71,17 +71,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$navVersion")
     // navigation component implementation >
 
-    // Koin <
-    val koinVersion = "3.5.0"
-    val koinAndroidVersion = "3.5.0"
-    implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
-    implementation("io.insert-koin:koin-core")
-    implementation("io.insert-koin:koin-android:$koinAndroidVersion")
-    testImplementation("io.insert-koin:koin-test:$koinVersion")
-    // Koin >
-
-    implementation(project(mapOf("path" to ":feature-calc-cargo-weight")))
-    implementation(project(mapOf("path" to ":feature-calc-temp-likvidus")))
-    implementation(project(mapOf("path" to ":feature-refguide")))
     implementation(project(mapOf("path" to ":core-ui")))
+    implementation(project(mapOf("path" to ":core:api")))
+    implementation(project(mapOf("path" to ":core:impl")))
 }

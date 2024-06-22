@@ -40,6 +40,9 @@ class MainFragment : Fragment(), MenuProvider {
             mainMenuButton2.setOnClickListener {
                 controller.navigate(metalcalcs.feature_listing_all_calcs.impl.R.id.action_mainFragment_to_castingMenuFragment)
             }
+            mainMenuButton4.setOnClickListener {
+                controller.navigate(metalcalcs.feature_listing_all_calcs.impl.R.id.action_mainFragment_to_guide_nav)
+            }
         }
     }
 

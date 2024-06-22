@@ -74,7 +74,6 @@ class SaveAdapter(private val listener: Listener,
             builder.setTitle(R.string.change_description_item_window)
             val descriptionInput = EditText(binding.root.context)
             descriptionInput.inputType = InputType.TYPE_CLASS_TEXT
-//            descriptionInput.setText(this.saves.get(adapterPosition).getDescription())
             descriptionInput.setText(saveItem.description)
             builder.setView(descriptionInput)
             builder.setPositiveButton(
@@ -92,7 +91,6 @@ class SaveAdapter(private val listener: Listener,
             builder.setTitle(R.string.rename_item_window)
             val nameInput = EditText(binding.root.context)
             nameInput.inputType = InputType.TYPE_CLASS_TEXT
-//            descriptionInput.setText(this.saves.get(adapterPosition).getDescription())
             nameInput.setText(saveItem.name)
             builder.setView(nameInput)
             builder.setPositiveButton(

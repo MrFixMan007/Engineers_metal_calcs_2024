@@ -182,5 +182,4 @@ class CargoWeightFragment : Fragment(), LongCalcAdapter.Listener, MenuProvider {
             }
         }
     }
-
 }
