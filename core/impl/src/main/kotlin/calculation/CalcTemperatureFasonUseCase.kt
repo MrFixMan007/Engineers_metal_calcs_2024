@@ -22,10 +22,7 @@ class CalcTemperatureFasonUseCase : TemperatureFasonUseCase{
         val w = if (param.w < 0.3f) 0f else param.w
         val co = if (param.co < 0.3f) 0f else param.co
 
-        val res = temp - coef_w * w - coef_cr * cr - coef_co * co
-        - coef_mo * mo - coef_v * v - coef_al * al - coef_ni * ni
-        - coef_mn * param.mn - coef_cu * cu - coef_si * param.si
-        - coef_ti * ti - coef_s * s - coef_p * p - coef_c * param.c
+        val res = temp - coef_w * w - coef_cr * cr - coef_co * co - coef_mo * mo - coef_v * v - coef_al * al - coef_ni * ni - coef_mn * param.mn - coef_cu * cu - coef_si * param.si - coef_ti * ti - coef_s * s - coef_p * p - coef_c * param.c
 
         return TemperatureFasonOutputParam(
             res = res,

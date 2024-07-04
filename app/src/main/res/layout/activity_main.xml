@@ -39,8 +39,7 @@
             app:menu="@menu/bottom_nav_menu"
             android:background="@color/primaryElementsColor"
             app:itemIconTint="@drawable/bottom_nav_selector"
-            app:itemTextColor="@color/white"
-            app:labelVisibilityMode="selected"
+            app:itemTextColor="@drawable/bottom_nav_selector"
             />
 
 </LinearLayout>

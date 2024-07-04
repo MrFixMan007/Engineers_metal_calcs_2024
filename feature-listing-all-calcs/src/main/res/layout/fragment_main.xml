@@ -43,12 +43,13 @@
                 android:id="@+id/main_menu_button3"
                 android:text="@string/main_menu_button3"
                 />
-            <Button
-                style="@style/CustomBigMenuButton"
-                android:id="@+id/main_menu_button4"
-                android:layout_marginRight="@dimen/marginTopLeft"
-                android:text="@string/main_menu_button4"
-                />
+<!--            <Button-->
+<!--                android:visibility="invisible"-->
+<!--                style="@style/CustomBigMenuButton"-->
+<!--                android:id="@+id/main_menu_button4"-->
+<!--                android:layout_marginRight="@dimen/marginTopLeft"-->
+<!--                android:text="@string/main_menu_button4"-->
+<!--                />-->
 
         </LinearLayout>
 

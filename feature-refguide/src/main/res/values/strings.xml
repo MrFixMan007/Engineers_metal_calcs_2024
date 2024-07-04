@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="gost_3_1125_88_name">ГОСТ 3.1125–88</string>
-    <string name="guide_menu_label">Справочник модельщика и формовщика</string>
+    <string name="guide_menu_label">Справочник</string>
 
     <string-array name="gost_3_1125_88">
         <item>1. ПРАВИЛА ГРАФИЧЕСКОГО ВЫПОЛНЕНИЯ ЭЛЕМЕНТОВ ЛИТЕЙНЫХ ФОРМ</item>

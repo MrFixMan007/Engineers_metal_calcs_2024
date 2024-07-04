@@ -17,7 +17,7 @@
     <string name="turnOff">Выключить</string>
     <string name="calcs">Расчёты</string>
     <string name="guide">Справочник</string>
-    <string name="stored_calcs">Хранимые расчёты</string>
+    <string name="stored_calcs">Хранилище</string>
     <string name="main_menu_button1">Температура заливки</string>
     <string name="main_menu_button2">Литейный расчёт</string>
     <string name="main_menu_button3">Шихтовка</string>

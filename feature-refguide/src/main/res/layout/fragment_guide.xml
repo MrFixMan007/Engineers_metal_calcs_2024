@@ -4,13 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb_vertical"
+            android:scrollbarTrackVertical="@drawable/scrollbar_track_vertical"
+
             android:fastScrollEnabled="true"
             android:layout_marginStart="@dimen/marginTopLeft"
             android:layout_marginEnd="@dimen/marginTopLeft"
