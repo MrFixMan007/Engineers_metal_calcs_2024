@@ -1,4 +1,4 @@
-Проект многомодульный. Xml, Fragment, Jetpack Fragment Navigation, Koin di, Room, JUnit, MVVM, LiveData
+Проект многомодульный. Xml, Single Activity, Fragments, Jetpack Fragment Navigation, Koin di, Room, JUnit, MVVM, LiveData
 
 Для литейных расчётов
 
